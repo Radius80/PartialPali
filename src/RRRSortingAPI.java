@@ -1,8 +1,17 @@
 
 public class RRRSortingAPI {
-
+    /**
+     * v.compareTo(w) == 0 means equal
+     * @param v
+     * @param w
+     * @return
+     */
     public static boolean less(Comparable v, Comparable w) {
         return v.compareTo(w) < 0;
+    }
+
+    public static boolean cEqual(Comparable v, Comparable w) {
+        return v.compareTo(w) == 0;        
     }
 
     public static void exch(Comparable[] a, int i, int j) {

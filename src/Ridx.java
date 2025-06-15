@@ -1,19 +1,23 @@
 public class Ridx {
+
 private Comparable value;
-private int idx;
+private int Sym;
 
 /**
  * Constructor for indx having class
  */
 public Ridx() {
-
+    value = null;
+    Sym = 0;
 }
 /**
  * Set Value
  * @param v value
  */
-public void setV(Comparable v) {
+public void addV(Comparable v, Comparable[] cArr) {
     value = v;
+    Sym = (int) cArr[(int) v];
+
 }
 
 /**
@@ -25,21 +29,8 @@ public Comparable getV() {
     return dis;
 }
 
-/**
- * Set indx
- * @param v value
- */
-public void setI(int i) {
-    idx = i;    
-}
 
-/**
- * Get idx
- * @return value
- */
-public int getI() {
-    int dis = idx;
-    return dis;
+public static void main(String[] args) {
+    
 }
-
 }
