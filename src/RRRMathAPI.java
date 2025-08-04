@@ -58,7 +58,7 @@ public class RRRMathAPI {
      * @param stop The value at which the function should stop iterating.
      * @return Sequence
      */
-    public static int zzzPLSFcN(int nmToOne, int numf, int stop) {
+    public int zzzPLSFcN(int nmToOne, int numf, int stop) {
         if (nmToOne != stop) {
             nmToOne = nmToOne - 1;
             numf = numf + nmToOne;
@@ -75,9 +75,9 @@ public class RRRMathAPI {
      * @param fnB (.. choose B)
      * @return (A choose B)
      */
-    public static int zzzAchooseB(int fnA, int fnB) {
+    public int zzzAchooseB(int fnA, int fnB) {
         long chooo = 0;
-        long f1 = 0, f2 = 0, f3 = 0;
+        long f1, f2, f3;
         int choO;
         if (fnB > fnA) {
             return 0;

@@ -32,7 +32,25 @@ public class RRRArrayFunctions {
         return ret;
     }
      */
-    
+//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111
+
+    /**
+     * This is to experiment with the dot dot dot function
+     */
+    public void testDotDotDot(Comparable[]... coms){
+        
+
+    }
+
+    /**
+     *  Copy comparable array while ensuring emutability
+     * @param com1 This is the array that is copied from
+     * @param com2 This is the array to copy to
+     */
+    public void CopyEmutCom(Comparable[] com1, Comparable[] com2 ) {
+        System.arraycopy(com1, 0, com2, 0, com1.length);
+
+    } 
 
     /**
      * This is a function that fills a array with the index squared integers. It

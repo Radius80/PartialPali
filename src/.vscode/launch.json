@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "TestMethods",
+            "request": "launch",
+            "mainClass": "PPTESTMethods"
+        },
+        
+        {
+            "type": "java",
+            "name": "Launch with Arguments Prompt",
+            "request": "launch",
+            "mainClass": "PP",
+            "args": "search"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "ZZZTestcodetoCommit",
+            "request": "launch",
+            "mainClass": "ZZZTestcodetoCommit",
+            "projectName": "22006710-RW214-project_c078e3db"
+        }
+    ]
+}
