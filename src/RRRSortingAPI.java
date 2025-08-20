@@ -240,7 +240,7 @@ public class RRRSortingAPI {
             return revf + tail + revS;
         }
     
-        revS = makeSecondHalfP56(hold3, holdFrst, holdSecH, jumpMax);
+        revS = makeSecondHalfP56(suiQP, holdFrst, holdSecH, jumpMax);
         revf = sReverse(revS);
         return revf + tail + revS;
     }
@@ -425,12 +425,13 @@ public class RRRSortingAPI {
      */
     public String makeSecondHalfP56(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
         RRRSortingAPI rsapi = new RRRSortingAPI();
-        String firstHalf, scndHalf, hold1st, hold2nd;
+        String firstHalf, scndHalf, hold1st, hold2nd, r1st, r2nd;
         StringBuilder pop, popf;
         //String MaybeSwaps = "";
         char c1 = '!', c2 = '!', rep;
         int cIdx, jIdx, hAmount = 1, fAmount = 0, c1c = 0, N;
         N = holdFrst.length();
+        boolean sm1st, sm2nd;
 
         if(jumpMax < srapiQP.length() - 2 && jumpMax >= holdSecH.length()  ) {
             jumpMax = holdSecH.length() - 1;
@@ -479,7 +480,14 @@ public class RRRSortingAPI {
             c1c++;
         }
         System.out.println(c2);
+        sm1st = hold1st.equals(srapiQP.substring(0, N ));
+
+        sm2nd = hold2nd.equals(srapiQP.substring(N,srapiQP.length()));
+        jIdx = rsapi.MinClamp(jumpMax - 1, 0);
         if(c1 == c2 && c1 == '!') {
+            if(sm1st & !sm2nd) {
+                return sReverse(hold1st);
+            }
             return hold2nd; 
         } else {
             popf = new StringBuilder(hold1st);
@@ -487,7 +495,6 @@ public class RRRSortingAPI {
             cIdx = hold1st.indexOf(c1);
             popf.setCharAt(cIdx, c2);
             hold1st = popf + "";
-            jIdx = rsapi.MinClamp(jumpMax - 1, 0);
             if(c2 == hold2nd.charAt(jIdx)) {
                 cIdx = jIdx;
             } else {
@@ -502,7 +509,16 @@ public class RRRSortingAPI {
             }
         }
     }
-
+    public static boolean isPali(String pali) {
+        int j = 0;
+        for (int i = 0; i < pali.length()/2; i++) {
+            j = (pali.length()) - 1 - i;
+            if(pali.charAt(i) != pali.charAt(j)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public static void main(String[] args) {
 
