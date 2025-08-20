@@ -7,32 +7,66 @@ public class PPTESTMethods {
     private int p5jmpMin;
     private int p6jmpMax;
     private int p7strLength;
-    
-    public static void main(String[] args) throws Exception {
-        //RRRSortingAPI rsapi = new RRRSortingAPI();
-        //RRRArrayFunctions raf = new RRRArrayFunctions();
-        //RRRStringstuffAPI tsapi = new RRRStringstuffAPI();
-        //Double time = 0.0;
-        //int jmPmX = 1;
-        //String swpline = "{ACGACGTGCAGCAT=[(5,6), (4,5), (3,4), (2,3), (1,2), (0,1)]}";
-        //String swpline = "{ACGACGTTGCAGCA=[(0,1), (1,2), (2,3), (3,4), (4,5), (5,6)]}";
-        //String swpline = "{TCAAGCCTGCATGGA=[(0,3), (2,4), (6,13)]}";
-        ////String swpline = "{TCAAGCCTGCATGGA=[(0,3), (2,4)]}";
-        //String line = "ACGACGTGCAGCAT";
-        //Comparable[] comLines = new Comparable[line.length()];
-        //comLines = rsapi.flCompa(comLines, line.length());
-        //RRRSortingAPI.doSwaps(swpline, comLines);
-        //String testPali = rsapi.printCode(comLines);
-        //System.out.println(testPali);
-        PPTESTMethods qptm = new PPTESTMethods();
-        //System.out.println(qptm.isPalindrome(testPali) + "");
-        //////Stopwatch ss = new Stopwatch();
-        qptm.doAllSubs();
-        //time = ss.elapsedTime();
-        //System.out.println("subsWith nested" + time);
 
+
+    public void testcase(){
+        p1nSwapsMin = 1; p2nSwapsMax = 91; p5jmpMin = 1; p6jmpMax = 1;
+        //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 3; p6jmpMax = 6;
+        //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 5;
+        //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 3; p6jmpMax = 6;
+        //p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 1; p6jmpMax = 6;
+        //p1nSwapsMin = 2; p2nSwapsMax = 4; p5jmpMin = 2; p6jmpMax = 7;
+
+    }    
+
+    public static void main(String[] args) throws Exception {
+        PPTESTMethods qptm = new PPTESTMethods();
+        RRRSortingAPI rsapi = new RRRSortingAPI();
+        Comparable[] arrIdx;
+        //String line = "AATTCC"; String pali = "CATTAC"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        //String line = "AAT"; String pali = "ATA"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        //String line = "TTAGAAA"; String pali = "ATAGATA"; int dosJmx = 6; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+
+        //String line = "TACGACGTGCAGCA"; String pali = "ACGACGTTGCAGCA"; int dosJmx = 1; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        //String line = "ACGACGTGCAGCAT"; String pali = "TACGACGGCAGCAT"; int dosJmx = 1; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        //String line = "TACGTACGGCAGCA"; String pali = "ACGACGTTGCAGCA"; int dosJmx = 1; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+
+        //String line = "TCAAGCCTGCATGGA"; String pali = "ACGTACGTGCATGCA"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+
+        //String line = "AGAG"; String swpline = "{AGAG=[(0,1)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();        
+        //String line = "AATTCC"; String swpline = "{AATTCC=[(0,4)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();        
+        //String line = "GCGACA"; String swpline = "{GCGACA=[(0,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();        
+        //String line = "AGAAA"; String swpline = "{AGAAA=[(1,2)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+
+
+        //String line = "TTAGAAA"; String swpline = "{TTAGAAA=[(0,5)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        //String line = "TACGACGTGCAGCA"; String swpline = "{TACGACGTGCAGCA=[(0,1), (1,2), (2,3), (3,4), (4,5), (5,6)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        //String line = "ACGACGTGCAGCAT"; String swpline = "{ACGACGTGCAGCAT=[(5,6), (4,5), (3,4), (2,3), (1,2), (0,1)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        //String line = "TACGTACGGCAGCA"; String swpline = "{TACGTACGGCAGCA=[(0,1), (1,2), (2,3), (4,5), (3,4), (5,6), (4,5), (6,7), (5,6)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        //String line = "TCAAGCCTGCATGGA"; String swpline = "{TCAAGCCTGCATGGA=[(0,3), (2,4), (6,13)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();        
+        
+        //String line = "GTTCGC"; String swpline = "{GTTCGC=[(0,1), (0,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        String line = "CATATGC"; String swpline = "{CATATGC=[(3,5)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+
+
+        Comparable [] arrIdx2 = new Comparable[line.length()]; arrIdx2 = rsapi.flCompa(arrIdx, line.length()); rsapi.doSwaps(swpline, arrIdx2);System.out.println(rsapi.printStr(arrIdx2, line));
+        
+        String pali = rsapi.mkPaliP56(line, dosJmx);
+        System.out.println(pali + " " + pali.equals(rsapi.printStr(arrIdx2, line)));
+        if( pali.equals(rsapi.printStr(arrIdx2, line) ) ) {
+            System.out.println("YAAAAAAATAAAAAAAA");
+        }
+        
+        
+        //String [] Swaps = new String[line.length()]; Swaps = qptm.cMakeMpP57(line, pali, arrIdx, dosJmx); System.out.println(ssapi.lstTARRAYString(Swaps));
+
+        //qptm.doAllSubs();
     }//end main
+
 //11111111//11111111//11111111//11111111//11111111//11111111//11111111//11111111//11111111//11111111
+
+
+
     /**
      * This method tests if a certain String is a palindrome
      * It will loop until stringlength/2(integer devision) 
@@ -72,6 +106,15 @@ public class PPTESTMethods {
         //String[] subStrings = {"GAA", "TTA","AGAAA","TTAGAAA"}; p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 6;
         //String[] subStrings = {"TTAGAAA"}; p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 3; p6jmpMax = 6;
         String[] subStrings = {"TCAAGCCTGCATGGA"}; p1nSwapsMin = 2; p2nSwapsMax = 4; p5jmpMin = 2; p6jmpMax = 7;
+        
+        //String[] subStrings = {"ACC", "CCG", "GTT", "TTC", "ATAT", 
+        //"ATATG", "CATAT", "CCGTT", "CGTTC", "GTTCG", 
+        //"TTCGC", "CGTTCG", "GTTCGC", "CATATGC", "CCCGTTC", 
+        //"CCGTTCG", "CGCATAT", "CGTTCGC", "GCATATG", "GTTCGCA", "TCGCATA"}; 
+        //p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 3; p6jmpMax = 7;
+
+        //String[] subStrings = {"ATATG"}; p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 3; p6jmpMax = 7;
+
 
         RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
         RRRSortingAPI rsapi = new RRRSortingAPI();
@@ -86,26 +129,27 @@ public class PPTESTMethods {
             gr = sqp.getSorted();
             if(isQPorP(gr)) {
                 dosJmx = rsapi.MaxClamp(dosJmx, line.length());
-                pali = rsapi.mkPali(line, dosJmx);
+                pali = rsapi.mkPaliP56(line, dosJmx);
                 arrSwps = new String[line.length()];
                 comLines = new Comparable[line.length()];
                 comLines = rsapi.flCompa(comLines, line.length());
                 cmSqSwap = rsapi.flCompa(comLines, line.length());
                 //mapped = chMakeMp(line, pali, comLines, dosJmx);
-                mapped = cMakeMp3(line, pali, comLines, dosJmx);
-                //mapped = cMakeMp2(line, pali, comLines);
-
+                mapped = cMakeMpP57(line, pali, comLines, dosJmx);                
+                //System.out.println(rsapi.printStr(mapped, line));
                 //System.out.println(rsapi.printCode(mapped));
-                
-                //chVPSwp(arrSwps, cmSqSwap, mapped, dosJmx);
-                //vPSwp(arrSwps, cmSqSwap, mapped, dosJmx);
-        
-                vPSwpP5(arrSwps, cmSqSwap, mapped, dosJmx);
+
+                //chVPSwp(arrSwps, cmSqSwap, mapped, dosJmx);        
+                vPSwp(arrSwps, cmSqSwap, mapped, dosJmx);
+                //ssapi.print100Line();
+                //System.out.println("Line: " + line);
+                //System.out.println("pali: " + pali);
                 System.out.println(ssapi.lstTARRAYString(arrSwps));
                 dosJmx = p6jmpMax;
             }
         }
     }
+
 //111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111
     /**
      * There are different make palindrome methods depending on the parameters
@@ -115,13 +159,13 @@ public class PPTESTMethods {
      * @param jmx The jump maximum
      * @return The palindrome
      */
-    public String choosePali(String ln, int jmn, int jmx, int smx) {
+    public String choosePali(String ln, int jmx) {
         RRRSortingAPI rsapi = new RRRSortingAPI();
-        if(jmx > 1) {
+        if(p2nSwapsMax == 21) {
 
-            return rsapi.mkPaliP3(ln, jmn,p6jmpMax, smx);    
+            return rsapi.mkPaliP56(ln,jmx);
         } else {
-            return rsapi.mkPali(ln,p6jmpMax);
+            return rsapi.mkPaliP56(ln,jmx);
         }
     }
 
@@ -147,10 +191,9 @@ public class PPTESTMethods {
         //int nmrSwaps = 0;
         //RRRSortingAPI rsapi = new RRRSortingAPI();
         if(p1nSwapsMin > 1 && p5jmpMin > 1) {
-            vPSwpP5(Sw, Sq, mP, dosMax);
-            System.out.println("P5");
+            vPSwp(Sw, Sq, mP, dosMax);
         } else {
-            vPSwp(Sw, Sq, mP,dosMax);
+            vPSwp(Sw, Sq, mP, dosMax);
         }
     }
 
@@ -216,72 +259,18 @@ public class PPTESTMethods {
      */
     public Comparable[] chMakeMp(String lne, String pali, Comparable[] sComAr, int dosMax ) {
         Comparable[] arrI = new Comparable[sComAr.length];
-        if(p5jmpMin == 1) {
+        if(p6jmpMax == 1) {
             //arrI = cMakeMp(lne, pali, sComAr);
-            arrI = cMakeMp3(lne, pali, sComAr,dosMax);
-            return arrI;
-        } else {
-            arrI = cMakeMp2(lne, pali, sComAr);
+            arrI = cMakeMpP57(lne, pali, sComAr,dosMax);
             return arrI;
         } 
-    }
-
-    /**
-     * Better algorythm to make the map sequence 
-     * SwapC is Swap count variable
-     * nsLine for (not same line) is a String of the quazipalindrome 
-     * where all the digits in the quazipalindrome that are the same
-     * as the palindrome are replaced with dashes 
-     * ex  let's say the string is  "TACGTACGGCAGCA" the palindrome is 
-     *                              "ACGACGTTGCAGCA" 
-     * nsLine is TACGTACG------
-     * nsbLine is the string builder of nsLine. 
-     * arIdx is the itterated character(in string form for ease of coding)
-     * End string(EndStr) is then a temperarry equivalent of nsLine
-     * All the dashes is then removed.
-     * idxx is then the first index(rank) of the character in the quazipalindrome
-     * That rank is then stored in what should be the bijection map
-     * of where the digit went from the QP to the Pali
-     * 
-     * @param lne String entered for the palindrome program
-     * @param pali Palindrome made from the quazipalindrome
-     * @param sComAr numbered Comparable array
-     * @return Mapped comparable array (null if there are to manny swaps) 
-     */
-    public Comparable[] cMakeMp(String lne, String pali, Comparable[] sComAr) {
-        RRRArrayFunctions raf = new RRRArrayFunctions();
-        String nspali = pali, nsLine = lne;
-        String pop2, arIdx, endStr;
-        Comparable[] arrI = new Comparable[sComAr.length];
-        raf.CopyEmutCom(sComAr, arrI);
-        //As in i like the index
-        int idxx;
-        int swapC = 0;
-        nsLine = SameSame(nsLine, nspali);
-        StringBuilder nsbLine = new StringBuilder(nsLine);
-        for (int i = 0; i < lne.length(); i++) {
-            arIdx = nsLine.charAt(i) + "";
-            if(!arIdx.equals("-")) {  
-                endStr = nsLine;
-                endStr = endStr.replace("-", "");
-                endStr = endStr.replace("^", "");
-                if (endStr.equals("")) {
-                    return arrI;
-                }
-                pop2 = nspali.charAt(i) + "";
-                idxx = nsLine.indexOf(pop2);
-                if (idxx != -1 ) {
-                    arrI[i] = idxx;
-                    nsbLine.setCharAt(idxx, '^');
-                    nsLine = nsbLine + "";
-                    swapC = swapC + 1;                    
-                }
-                if (swapC > p2nSwapsMax ) {
-                    return null;
-                }
-            }
+        if(p1nSwapsMin > 1) {
+            arrI = cMakeMpP57(lne, pali, sComAr,dosMax);
+            return arrI;
+        } else {
+            arrI = cMakeMpP57(lne, pali, sComAr,dosMax);
+            return arrI;
         }
-        return arrI;
     }
 
     /**
@@ -294,7 +283,8 @@ public class PPTESTMethods {
      *                              "ACGACGTTGCAGCA" 
      * nsLine is TACGTACG------
      * nsbLine is the string builder of nsLine. 
-     * arIdx is the itterated character(in string form for ease of coding)
+     * smapStr is for stopmap string. It will be checked to see if the
+     * algorhythm should terminate.
      * End string(EndStr) is then a temperarry equivalent of nsLine
      * All the dashes is then removed.
      * idxx is then the first index(rank) of the character in the quazipalindrome
@@ -308,120 +298,84 @@ public class PPTESTMethods {
      * @param sComAr numbered Comparable array
      * @return Mapped comparable array (null if there are to manny swaps) 
      */
-    public Comparable[] cMakeMp2(String lne, String pali, Comparable[] sComAr) {
+    public String[] cMakeMpP57(String lne, String pali, Comparable[] sComAr, int dosJmx) {
         RRRArrayFunctions raf = new RRRArrayFunctions();
         RRRSortingAPI rsapi = new RRRSortingAPI();
-        String nspali = pali, nsLine = lne, JumpSub;
-        String pop2, arIdx, endStr;
+        String mmPali = pali, nsLn = lne, mapStr, smapStr;
+        StringBuilder nsbLn, nsbPali;
+        String[] swapsOutput = new String[lne.length()];
         Comparable[] arrI = new Comparable[sComAr.length];
-        raf.CopyEmutCom(sComAr, arrI);
-        //As in i like the index
-        int idxx;
-        int swapC = 0;
-        nsLine = SameSame(nsLine, nspali);
-        StringBuilder nsbLine = new StringBuilder(nsLine);
-        for (int i = 0; i < lne.length(); i++) {
-            arIdx = nsLine.charAt(i) + "";
-            if(!arIdx.equals("-")) {  
-                endStr = nsLine;
-                endStr = endStr.replace("-", "");
-                endStr = endStr.replace("^", "");
-                if (endStr.equals("")) {
-                    return arrI;
-                }
-                pop2 = nspali.charAt(i) + "";
-                JumpSub = nsLine.substring(0,rsapi.MaxClamp(p6jmpMax + i + 1, lne.length()));
-                idxx = JumpSub.lastIndexOf(pop2);
-                if (idxx != -1 ) {
-                    arrI[i] = idxx;
-                    nsbLine.setCharAt(idxx, '^');
-                    nsLine = nsbLine + "";
-                    swapC = swapC + 1;                    
-                }
-                if (swapC > lne.length() ) {
-                    return null;
-                }
-            }
-        }
-        return arrI;
-    }
+        int ip2, ip1, swapC = 0, N = lne.length(), j;
+        char pop2;
 
-    /**
-     * Better algorythm to make the map sequence 
-     * SwapC is Swap count variable
-     * nsLine for (not same line) is a String of the quazipalindrome 
-     * where all the digits in the quazipalindrome that are the same
-     * as the palindrome are replaced with dashes 
-     * ex  let's say the string is  "TACGTACGGCAGCA" the palindrome is 
-     *                              "ACGACGTTGCAGCA" 
-     * nsLine is TACGTACG------
-     * nsbLine is the string builder of nsLine. 
-     * arIdx is the itterated character(in string form for ease of coding)
-     * End string(EndStr) is then a temperarry equivalent of nsLine
-     * All the dashes is then removed.
-     * idxx is then the first index(rank) of the character in the quazipalindrome
-     * That rank is then stored in what should be the bijection map
-     * of where the digit went from the QP to the Pali
-     * 
-     * nsLine.substring(6,7) = "G" we want two
-     * ->p6jmpMax + i + 1
-     * @param lne String entered for the palindrome program
-     * @param pali Palindrome made from the quazipalindrome
-     * @param sComAr numbered Comparable array
-     * @return Mapped comparable array (null if there are to manny swaps) 
-     */
-    public Comparable[] cMakeMp3(String lne, String pali, Comparable[] sComAr, int dosMax) {
-        RRRArrayFunctions raf = new RRRArrayFunctions();
-        RRRSortingAPI rsapi = new RRRSortingAPI();
-        String nspali = pali, nsLine = lne, JumpSub;
-        String pop2, arIdx, endStr;
-        Comparable[] arrI = new Comparable[sComAr.length];
         raf.CopyEmutCom(sComAr, arrI);
-        //As in i like the index
-        int idxx;
-        int swapC = 0;
-        nsLine = SameSame(nsLine, nspali);
-        StringBuilder nsbLine = new StringBuilder(nsLine);
-        for (int i = 0; i < lne.length(); i++) {
-            arIdx = nsLine.charAt(i) + "";
-            if(!arIdx.equals("-")) {  
-                endStr = nsLine;
-                endStr = endStr.replace("-", "");
-                endStr = endStr.replace("^", "");
-                if (endStr.equals("")) {
-                    return arrI;
+        nsLn = SameSame(nsLn, mmPali);
+        nsbLn = new StringBuilder(nsLn);
+        nsbPali = new StringBuilder(pali);
+        for (int i = 0; i < N; i++) {
+            if( i == 3) {
+                i = 3;
+            }
+            if(nsLn.charAt(i) != '-') {
+                pop2 = mmPali.charAt(i);
+                j = i + dosJmx;
+                if(i == 4) {
+                    i = 4;
                 }
-                pop2 = nspali.charAt(i) + "";
-                JumpSub = nsLine.substring(0,rsapi.MaxClamp(p6jmpMax + i + 1, lne.length()));
-                idxx = JumpSub.lastIndexOf(pop2);
-                if (idxx != -1 ) {
-                    arrI[i] = idxx;
-                    nsbLine.setCharAt(idxx, '^');
-                    nsLine = nsbLine + "";
-                    swapC = swapC + 1;                    
-                } else {
-                    idxx = nsLine.indexOf(pop2);
-                    if (idxx != -1) {
-                        arrI[i] = idxx;
-                        nsbLine.setCharAt(idxx, '^');
-                        nsLine = nsbLine + "";
+                mapStr = rsapi.printStr(arrI, nsLn);
+                ip2 = rsapi.getP2(mapStr, pop2, j, i, dosJmx);
+                if(ip2 != -1 ){
+                    mapStr = rsapi.printStr(arrI, nsLn);
+                    while(mapStr.charAt(i) != mmPali.charAt(i)) {
+                        ip2 = ip2 = rsapi.getP2(mapStr, pop2, j, i, dosJmx);
+                        ip1 = mmPali.indexOf(pop2);
+                        if(Math.abs(ip2 - ip1) > dosJmx) {
+                            ip1 = ip2 - dosJmx;
+                        }
+                        rsapi.exch(arrI, ip2, ip1);
+                        swapsOutput[swapC] = "(" + ip1 + "," + ip2 + ")"; 
+                        mapStr = rsapi.printStr(arrI, nsLn);
+                        smapStr = rsapi.printStr(arrI, lne);
+                        if(smapStr.equals(pali)) {
+                            swapsOutput[swapsOutput.length - 1] = swapC + "";
+                            return swapsOutput;
+                        }
                         swapC = swapC + 1;
+                        if(swapC > Math.min(p2nSwapsMax, N)) {
+                            return null;
+                        }
+                    }
+        //if(mapStr.charAt(i) == mmPali.charAt(i)) will be true
+                    for(int i3 = i; i3 < N; i3 ++) {
+                        if(mapStr.charAt(i3) == mmPali.charAt(i3)) {
+                            nsbLn.setCharAt(i3, '^');
+                            nsLn = nsbLn + "";
+                            nsbPali.setCharAt(i3, '!');
+                            mmPali = nsbPali + "";
+                        }
                     }
                 } 
-
-                //if(Math.abs((double) idxx - i)  > dosMax) {
-                //    idxx = JumpSub.indexOf(pop2);
-                //}
-
-                if (swapC > lne.length() ) {
-                    return null;
-                }
             }
         }
-        return arrI;
+        return swapsOutput;
     }
 
-
+    /**
+     * This takes a string and removes dashes '-' and hates '^' from it and 
+     * returns true if the resulting string is equal to ""
+     * mmBreakL is an acronym for Make Map Break Loop
+     * This function is made so that it is easier to understand why there is a
+     * return statement in the for loop
+     * 
+     * @param blnsLn break Loop not same Line
+     * @return True is blnsLn is "" and false otherwise
+     */
+    public boolean mmBreakL(String blnsLn) {
+        String blStr = blnsLn;
+        blStr = blStr.replace("-", "");
+        blStr = blStr.replace("^", "");
+        return blStr.equals("");
+    }
 
     /**
      * This function replaces characters in lne that apears in the same char index
@@ -443,56 +397,6 @@ public class PPTESTMethods {
     }
 
     /**
-     * Phaze3
-     * This method compares the i'th digit of the mapped array and a sequentially
-     * index counted array and sequentially changes the sequential array to look
-     * like the mapped array and saves the swaps as entries in a string array
-     * p2 is where the mapped version says the digit should be and 
-     * p1 is 'i' the iterator that as it goes through looking how to 
-     * change the QP into the palindrome 
-     * @param arPSSwp PartialSwap Swap array
-     * @param arPSS PartialSwap Sequencial comparable array
-     * @param arPSMp PartialSwap mapped array
-     */
-    public void vPSwp(String[] arPSSwp, Comparable[] arPSS, Comparable[] arPSMp, int jMax) {
-        RRRSortingAPI rsapi = new RRRSortingAPI();
-        String strMapped, strfU;
-        int jmPmX = jMax;
-        int i = 0, i2 = 0, diff, p2, p1, node;
-        while (true) {
-            diff = Math.abs((int) arPSMp[i] - (int) arPSS[i]);
-            if (diff > 0) {
-                node = (int) arPSMp[i];
-                while (!rsapi.cEqual(arPSS[i], arPSMp[i]) && i2 < arPSSwp.length) {
-                    p2 = cRank(arPSS, node);
-                    if (p2nSwapsMax == 1) {
-                        p1 = cRank(arPSMp, p2);
-                    } else {
-                    p1 = rsapi.MinClamp((p2 - jmPmX), 0);
-                    }
-                    rsapi.exch(arPSS, p2, p1);
-                    arPSSwp[i2] = "(" + p1 + "," + p2 + ")->" + i2;
-                    i2 = i2 + 1;
-                }
-                strfU = rsapi.printCode(arPSS);
-                strMapped = rsapi.printCode(arPSMp);
-                if (strfU.equals(strMapped)) {
-                    arPSSwp[arPSSwp.length - 1] = i2 + "";
-                break;
-                }
-            } else if (diff == jmPmX) {
-                arPSS[i] = arPSMp[i];
-            }
-            i++;
-            if (i >= arPSMp.length ) {
-                break;
-            }
-        }
-    }//endVswp    
-//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111
-
-
-    /**
      * Phaze5
      * This method compares the i'th digit of the mapped array and a sequentially
      * index counted array and sequentially changes the sequential array to look
@@ -504,7 +408,7 @@ public class PPTESTMethods {
      * @param arPSS PartialSwap Sequencial comparable array
      * @param arPSMp PartialSwap mapped array
      */
-    public void vPSwpP5(String[] arPSSwp, Comparable[] arPSS, Comparable[] arPSMp, int jMax) {
+    public void vPSwp(String[] arPSSwp, Comparable[] arPSS, Comparable[] arPSMp, int jMax) {
         RRRSortingAPI rsapi = new RRRSortingAPI();
         String strMapped, strfU;
         int i = 0, i2 = 0, jmPmX = jMax, diff, p2, p1, node;

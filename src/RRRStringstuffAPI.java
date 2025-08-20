@@ -77,4 +77,27 @@ public class RRRStringstuffAPI {
         return s;
     }
 
+    public void print100Line() {
+        System.out.println("");
+        for (int i = 0; i < 50; i++) {
+            System.out.print("=");
+        }
+        System.out.println("");
+
+    }
+
+    /**
+     * Method to print the order of a priority que for string 
+     * manupuation 
+     * @param order Comparable array of the priority que 
+     * @return The string containing the map of the order
+     */
+    public String printCode(Comparable[] order) {
+    String output = "";
+    for (Comparable order1 : order) {
+        output = output + "|" + order1 + "";
+    }
+    return output;
+    }
+
 }
