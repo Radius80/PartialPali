@@ -480,11 +480,10 @@ public class RRRSortingAPI {
             c1c++;
         }
         System.out.println(c2);
-        sm1st = hold1st.equals(srapiQP.substring(0, N ));
-
-        sm2nd = hold2nd.equals(srapiQP.substring(N,srapiQP.length()));
         jIdx = rsapi.MinClamp(jumpMax - 1, 0);
         if(c1 == c2 && c1 == '!') {
+        sm1st = hold1st.equals(srapiQP.substring(0, N ));
+        sm2nd = hold2nd.equals(srapiQP.substring(N,srapiQP.length()));
             if(sm1st & !sm2nd) {
                 return sReverse(hold1st);
             }
@@ -495,7 +494,8 @@ public class RRRSortingAPI {
             cIdx = hold1st.indexOf(c1);
             popf.setCharAt(cIdx, c2);
             hold1st = popf + "";
-            if(c2 == hold2nd.charAt(jIdx)) {
+//            if(c2 == hold2nd.charAt(jIdx)) {
+            if(false) {
                 cIdx = jIdx;
             } else {
                 cIdx = hold2nd.indexOf(c2);
