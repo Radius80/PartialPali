@@ -7,6 +7,7 @@ public class RRRSortingAPI {
     private int p5jmpMin;
     private int p6jmpMax;
     private int p7strLength;
+    private String p8QP;
     /**
      * Equality condition for comparables
      * @param v first comparable
@@ -442,20 +443,11 @@ public class RRRSortingAPI {
         boolean sm1st, sm2nd;
         jumpMax = MinClamp(jumpMax, 1);
         //Why this ^
-        firstHalf = holdFrst;
-        scndHalf = holdSecH;
         hold1st = holdFrst;
         hold2nd = holdSecH;
-        
+        p8QP = srapiQP;
         c1 = cFinddif(hold1st, hold2nd);
-        System.out.println(c1);
-        c1c = 0;
         c2 = cFinddif(hold2nd, hold1st);
-        System.out.println(c2);
-        jIdx = rsapi.MinClamp(jumpMax - 1, 0);
-        if(srapiQP.length() % 2 == 0) {
-            jIdx--;
-        }
         if(c1 == c2 && c1 == '!') {
         sm1st = hold1st.equals(srapiQP.substring(0, N ));
         sm2nd = hold2nd.equals(srapiQP.substring(N,srapiQP.length()));
@@ -464,41 +456,10 @@ public class RRRSortingAPI {
             }
             return hold2nd; 
         } else {
-            pop = new StringBuilder(hold2nd);        
-            for (int i = jIdx; i >= p5jmpMin - 1; i--) {
-                if (i == 0) {
-                    System.out.println("");
-                }
-                pop.setCharAt(i, c1);
-                hold2nd = pop + "";
-                if(hold2nd.equals(hold1st)){
-                    return hold2nd;
-                }
-                popf = new StringBuilder(hold1st);
-                for (int j = MinClamp((i*2) - jumpMax*2, 1); j < N; j ++) {
-                    popf.setCharAt(j, c2);
-                    hold1st = popf + "";
-                    if(hold1st.equals(hold2nd)){
-                        return hold2nd;
-                    }
-                    hold1st = holdFrst;
-                    popf = new StringBuilder(hold1st);
-                }
-                hold2nd = holdSecH;
-                pop = new StringBuilder(hold2nd);
+            String swap1l = oneSwapleft(holdFrst, holdSecH, jumpMax, c1, c2);
+            if (!swap1l.equals("x")){
+                return swap1l;
             }
-            popf = new StringBuilder(hold1st);
-                        
-            cIdx2nd = hold2nd.indexOf(c2);
-            pop.setCharAt(cIdx2nd, c1);
-            hold2nd = pop + "";
-
-            cIdx1st = hold1st.indexOf(c1);
-            popf.setCharAt(cIdx1st, c2);            
-            hold1st = popf + "";
-
-
-
             if(hold2nd.equals(hold1st)) {
                 return hold1st;
             } else {
@@ -535,6 +496,10 @@ public class RRRSortingAPI {
         StringBuilder pop = new StringBuilder(hold2nd), popf;
         
         int N = hold1st.length(), jIdx = MinClamp(jumpMax - 1, 0);
+        if(p8QP.length() % 2 == 0) {
+            jIdx--;
+        }
+
         for (int i = jIdx; i >= p5jmpMin - 1; i--) {
             if (i == 0) {
                 System.out.println("");
