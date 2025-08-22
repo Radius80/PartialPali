@@ -222,7 +222,6 @@ public class RRRSortingAPI {
         String revf, revS;
         String holdFrst, holdSecH;
         int idx = 0;
-        //find Tail
         if (hold3.length() % 2 != 0) {
             idx = setTail(suiQP);
             tail = suiQP.charAt(idx) + "";
@@ -244,9 +243,8 @@ public class RRRSortingAPI {
              revf = holdFrst;
              revS = sReverse(holdSecH);
             return revf + tail + revS;
-        }
-    
-        revS = makeSecondHalfP56(suiQP, holdFrst, holdSecH, jumpMax);
+        }    
+        revS = makeSecondHalfP57(suiQP, holdFrst, holdSecH, jumpMax);
         revf = sReverse(revS);
         return revf + tail + revS;
     }
@@ -376,7 +374,7 @@ public class RRRSortingAPI {
     }
 
 
-         /**
+    /**
      * Males the second half if the second half is made it can just use that to
      * make the rest
      *
@@ -432,13 +430,12 @@ public class RRRSortingAPI {
     public String makeSecondHalfP56(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
         //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 5;
         p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 1; p6jmpMax = 6;
+        //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 6;
         
-        RRRSortingAPI rsapi = new RRRSortingAPI();
-        String firstHalf, scndHalf, hold1st, hold2nd, r1st, r2nd;
+        String hold1st, hold2nd;
         StringBuilder pop, popf;
-        //String MaybeSwaps = "";
-        char c1 = '!', c2 = '!', rep;
-        int cIdx1st, cIdx2nd, jIdx, hAmount = 1, fAmount = 0, c1c = 0, N;
+        char c1 = '!', c2 = '!';
+        int cIdx1st, cIdx2nd, N;
         N = holdFrst.length();
         boolean sm1st, sm2nd;
         jumpMax = MinClamp(jumpMax, 1);
@@ -460,14 +457,122 @@ public class RRRSortingAPI {
             if (!swap1l.equals("x")){
                 return swap1l;
             }
-            if(hold2nd.equals(hold1st)) {
-                return hold1st;
-            } else {
+            cIdx2nd = hold2nd.indexOf(c2);
+            pop = new StringBuilder(hold2nd);
+            pop.setCharAt(cIdx2nd, c1);
+            hold2nd = pop + "";
+
+            cIdx1st = hold1st.indexOf(c1);
+            popf = new StringBuilder(hold1st);
+            popf.setCharAt(cIdx1st, c2);
+            hold1st = popf + "";
+
             return makeSecondHalfP56(srapiQP, hold1st, hold2nd, jumpMax);
-            }
         }
     }
     
+        /**
+     * Males the second half if the second half is made it can just use that to
+     * make the rest
+     *
+     * After the integer initialization the half jump length is worked out.
+     * EXAMPLE: if jumplength is 4 QP = ACGTGTCA the palindrome is then:
+     * ACGTTGCA and the correct second half is TGCA so the jump length should be
+     * something like 2 depending on the QP
+     * 
+     * jIdx is an acronym for jumpIdx
+     * 
+     * The QP is then split into 2 equal length parts and their values are coppied
+     * to be called again after editing.
+     * if there is the same amount of each unique digit in the first and second half
+     * the second half is the correct order it seems 
+     * So then we want to see what in the second half appears in the first half.
+     * So to see if the longest jump switch is the correct one a charracter rep
+     * is set to the value of what the second position would be but in second half
+     * form.
+     * hAmount (The amount of times it occurs in the subset) is then calculated
+     * by subtracting the origional secondhalf length with the half length after
+     * that the all the characters equal to rep is removed from the second half.
+     * 
+     * fAmount(the amount of times rep occurs in the first half) is then calculated the
+     * same way.
+     * 
+     * 
+     * It is now possible to understand the condition inside the while brackets.
+     * This algorythm runs until the quantities of the unique digits in the second
+     * half is equal to the quantities in of the same digits in the first half.
+     * 
+     * So inside the while the rep is the fist character in the secondlf of the string
+     * Inside the while it skips the digits where there are equal amount of them in 
+     * the first half and the second
+     * 
+     * Then in the if after pop declaration if(the amount the digit occurs in the
+     * second half is more than the first half), which means a digit from the first
+     * half needs to be sent to the second half and the postion it is sent is to 
+     * the altered jump length
+     * 
+     * 
+     * else (if that digit occurs more in the first string ):
+     * The first half just gets the rep concatenated at left side of the
+     * firsthalf string
+     * 
+     * So then it often performs more actions than the half string are long
+     * which is where the jump length should be adjusted accordingly
+     * TGTCGC
+     * CGTTGC 
+     * @param srapiQP Quazipalindrome
+     * @param jumMax JumpMax
+     * @return Second half;
+     */
+    public String makeSecondHalfP57(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
+        //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 5;
+        p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 1; p6jmpMax = 6;
+        //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 6;
+        //p1nSwapsMin = 1; p2nSwapsMax = 91; p5jmpMin = 1; p6jmpMax = 1;
+        
+        String hold1st, hold2nd, swap1l;
+        StringBuilder pop, popf;
+        char c1 = '!', c2 = '!';
+        int cIdx1st, cIdx2nd, N;
+        N = holdFrst.length();
+        jumpMax = MinClamp(jumpMax, 1);
+        //Why this ^ 
+        hold1st = holdFrst;
+        hold2nd = holdSecH;
+        p8QP = srapiQP;
+        c1 = cFinddif(hold1st, hold2nd);
+        c2 = cFinddif(hold2nd, hold1st);
+        if(c1 == c2 && c1 == '!') {
+            if(p6jmpMax == 1) {
+                return hold2nd;
+            } 
+            if(isPali(hold1st)) {
+                return hold1st;
+            } else if(isPali(hold2nd)) {
+                return hold2nd;
+            } else if(hold2nd.equals(sReverse(hold1st))) {
+                return hold2nd;
+            } 
+        } if( p6jmpMax > 1) {
+            swap1l = oneSwapleft(holdFrst, holdSecH, jumpMax, c1, c2);
+            if(!swap1l.equals("x")){
+                return swap1l;
+            }
+
+        } 
+        cIdx2nd = hold2nd.indexOf(c2);
+        pop = new StringBuilder(hold2nd);
+        pop.setCharAt(cIdx2nd, c1);
+        hold2nd = pop + "";
+        cIdx1st = hold1st.indexOf(c1);
+        popf = new StringBuilder(hold1st);
+        popf.setCharAt(cIdx1st, c2);
+        hold1st = popf + "";
+
+        return makeSecondHalfP57(srapiQP, hold1st, hold2nd, jumpMax);
+    }
+
+
     public char cFinddif(String h2nd, String h1st) {
         char rep, cd = '!';
         String t2nd = h2nd, t1st = h1st;
@@ -494,34 +599,81 @@ public class RRRSortingAPI {
     public String oneSwapleft (String holdFrst, String holdSecH, int jumpMax, char c1, char c2) {
         String hold1st = holdFrst, hold2nd = holdSecH;
         StringBuilder pop = new StringBuilder(hold2nd), popf;
-        
+        char pc1, pc2;
         int N = hold1st.length(), jIdx = MinClamp(jumpMax - 1, 0);
         if(p8QP.length() % 2 == 0) {
             jIdx--;
         }
 
-        for (int i = jIdx; i >= p5jmpMin - 1; i--) {
-            if (i == 0) {
-                System.out.println("");
-            }
-            pop.setCharAt(i, c1);
-            hold2nd = pop + "";
-            if(hold2nd.equals(hold1st)){
-                return hold2nd;
-            }
+        //for (int i = jIdx; i >= p5jmpMin - 1; i--) {
+        //    if (i == 0) {
+        //        System.out.println("");
+        //    }
+        //    if(hold2nd.charAt(i) == c1) {
+        //        pop.setCharAt(MinClamp(i - 1, 0), c1);
+        //    } else {
+        //        pop.setCharAt(i, c1);
+        //    }
+        //    hold2nd = pop + "";
+        //    if(hold2nd.equals(sReverse(hold1st))){
+        //        return hold2nd;
+        //    }
+        //    popf = new StringBuilder(hold1st);
+        //    for (int j = MinClamp((i*2) - jumpMax*2, 0); j < N; j ++) {
+        //        if(hold1st.charAt(j) == c2) {
+        //            popf.setCharAt(MaxClamp(j + 1, N -1), c2);
+        //        } else {
+        //        popf.setCharAt(j, c2);
+        //        }
+        //        hold1st = popf + "";
+        //        if(hold1st.equals(sReverse(hold2nd))){
+        //            return hold1st;
+        //        }
+        //        hold1st = holdFrst;
+        //        popf = new StringBuilder(hold1st);
+        //    }
+        //    hold2nd = holdSecH;
+        //    pop = new StringBuilder(hold2nd);
+        //}
+
+        for (int j = MinClamp((jIdx*2) - jumpMax*2, 0); j < N; j ++) {            
             popf = new StringBuilder(hold1st);
-            for (int j = MinClamp((i*2) - jumpMax*2, 1); j < N; j ++) {
-                popf.setCharAt(j, c2);
-                hold1st = popf + "";
-                if(hold1st.equals(hold2nd)){
+            if(hold1st.charAt(j) == c2) {
+                popf.setCharAt(MaxClamp(j + 1, N -1), c2);
+            } else {
+            popf.setCharAt(j, c2);
+            }
+            hold1st = popf + "";
+            if(isPali(hold1st) && hold1st.equals(hold2nd)){
+                return hold1st;
+            }
+        
+            for (int i = jIdx; i >= p5jmpMin - 1; i--) {        
+                if(hold2nd.charAt(i) == c1) {
+                    pop.setCharAt(MinClamp(i - 1, 0), c1);
+                } else {
+                    pop.setCharAt(i, c1);
+                }
+                hold2nd = pop + "";
+                if(hold2nd.equals(sReverse(hold1st))){
                     return hold2nd;
                 }
-                hold1st = holdFrst;
-                popf = new StringBuilder(hold1st);
+                pc1 = cFinddif(hold1st, hold2nd);
+                pc2 = cFinddif(hold2nd, hold1st);
+                if(pc1 == pc2 && pc1 == '!' ){
+                    if(isPali(hold1st)){
+                        return hold1st;
+                    } else if (isPali(hold2nd)) {
+                        return hold2nd;
+                    }
+                }  
+                hold2nd= holdSecH;
+                pop = new StringBuilder(hold2nd);
             }
-            hold2nd = holdSecH;
-            pop = new StringBuilder(hold2nd);
+            hold1st = holdFrst;
+            popf = new StringBuilder(hold1st);
         }
+
         return "x";
     }
 

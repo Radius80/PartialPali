@@ -44,9 +44,9 @@ public class PPTESTMethods {
         //String line = "TACGTACGGCAGCA"; String swpline = "{TACGTACGGCAGCA=[(0,1), (1,2), (2,3), (4,5), (3,4), (5,6), (4,5), (6,7), (5,6)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
         //String line = "TCAAGCCTGCATGGA"; String swpline = "{TCAAGCCTGCATGGA=[(0,3), (2,4), (6,13)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();        
         
-        //String line = "GTTCGC"; String swpline = "{GTTCGC=[(0,1), (0,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        String line = "GTTCGC"; String swpline = "{GTTCGC=[(0,1), (0,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
         //String line = "CATATGC"; String swpline = "{CATATGC=[(3,5)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
-        String line = "CCCGTTC"; String swpline = "{CCCGTTC=[(1,4)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        //String line = "CCCGTTC"; String swpline = "{CCCGTTC=[(1,4)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
 
 
         Comparable [] arrIdx2 = new Comparable[line.length()]; arrIdx2 = rsapi.flCompa(arrIdx, line.length()); rsapi.doSwaps(swpline, arrIdx2);System.out.println(rsapi.printStr(arrIdx2, line));
@@ -57,9 +57,6 @@ public class PPTESTMethods {
             System.out.println("YAAAAAAATAAAAAAAA");
         }
         
-        //String [] Swaps = new String[line.length()]; Swaps = qptm.cMakeMpP57(line, pali, arrIdx, dosJmx); System.out.println(ssapi.lstTARRAYString(Swaps));
-
-        //qptm.doAllSubs();
     }//end main
 
 //11111111//11111111//11111111//11111111//11111111//11111111//11111111//11111111//11111111//11111111
