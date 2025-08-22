@@ -32,10 +32,12 @@ public class PPTESTMethods {
         //String line = "TACGTACGGCAGCA"; String pali = "ACGACGTTGCAGCA"; int dosJmx = 1; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
 
         //String line = "TCAAGCCTGCATGGA"; String pali = "ACGTACGTGCATGCA"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        //String line = "TCAAGCCTGCATGGA"; String rpali = "ACGTACGTGCATGCA"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+
 
         //String line = "AGAG"; String swpline = "{AGAG=[(0,1)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();        
         //String line = "AATTCC"; String swpline = "{AATTCC=[(0,4)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();        
-        //String line = "GCGACA"; String swpline = "{GCGACA=[(0,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();        
+        String line = "GCGACA"; String swpline = "{GCGACA=[(0,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();        
         //String line = "AGAAA"; String swpline = "{AGAAA=[(1,2)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
         //String line = "TTAGAAA"; String swpline = "{TTAGAAA=[(0,5)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
         
@@ -44,7 +46,7 @@ public class PPTESTMethods {
         //String line = "TACGTACGGCAGCA"; String swpline = "{TACGTACGGCAGCA=[(0,1), (1,2), (2,3), (4,5), (3,4), (5,6), (4,5), (6,7), (5,6)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
         //String line = "TCAAGCCTGCATGGA"; String swpline = "{TCAAGCCTGCATGGA=[(0,3), (2,4), (6,13)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();        
         
-        String line = "GTTCGC"; String swpline = "{GTTCGC=[(0,1), (0,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        //String line = "GTTCGC"; String swpline = "{GTTCGC=[(0,1), (0,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
         //String line = "CATATGC"; String swpline = "{CATATGC=[(3,5)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
         //String line = "CCCGTTC"; String swpline = "{CCCGTTC=[(1,4)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
 
@@ -56,7 +58,6 @@ public class PPTESTMethods {
         if( pali.equals(rsapi.printStr(arrIdx2, line) ) ) {
             System.out.println("YAAAAAAATAAAAAAAA");
         }
-        
     }//end main
 
 //11111111//11111111//11111111//11111111//11111111//11111111//11111111//11111111//11111111//11111111

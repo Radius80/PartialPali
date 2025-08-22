@@ -525,9 +525,9 @@ public class RRRSortingAPI {
      * @return Second half;
      */
     public String makeSecondHalfP57(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
-        //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 5;
-        p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 1; p6jmpMax = 6;
-        //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 6;
+        //p5jmpMin = 1; p6jmpMax = 5;
+        //p1nSwapsMin = 2; p2nSwapsMax = 4; p5jmpMin = 2; p6jmpMax = 14;
+         p5jmpMin = 1; p6jmpMax = 6;
         //p1nSwapsMin = 1; p2nSwapsMax = 91; p5jmpMin = 1; p6jmpMax = 1;
         
         String hold1st, hold2nd, swap1l;
@@ -553,12 +553,12 @@ public class RRRSortingAPI {
             } else if(hold2nd.equals(sReverse(hold1st))) {
                 return hold2nd;
             } 
+            return hold2nd;
         } if( p6jmpMax > 1) {
             swap1l = oneSwapleft(holdFrst, holdSecH, jumpMax, c1, c2);
             if(!swap1l.equals("x")){
                 return swap1l;
             }
-
         } 
         cIdx2nd = hold2nd.indexOf(c2);
         pop = new StringBuilder(hold2nd);
@@ -604,38 +604,6 @@ public class RRRSortingAPI {
         if(p8QP.length() % 2 == 0) {
             jIdx--;
         }
-
-        //for (int i = jIdx; i >= p5jmpMin - 1; i--) {
-        //    if (i == 0) {
-        //        System.out.println("");
-        //    }
-        //    if(hold2nd.charAt(i) == c1) {
-        //        pop.setCharAt(MinClamp(i - 1, 0), c1);
-        //    } else {
-        //        pop.setCharAt(i, c1);
-        //    }
-        //    hold2nd = pop + "";
-        //    if(hold2nd.equals(sReverse(hold1st))){
-        //        return hold2nd;
-        //    }
-        //    popf = new StringBuilder(hold1st);
-        //    for (int j = MinClamp((i*2) - jumpMax*2, 0); j < N; j ++) {
-        //        if(hold1st.charAt(j) == c2) {
-        //            popf.setCharAt(MaxClamp(j + 1, N -1), c2);
-        //        } else {
-        //        popf.setCharAt(j, c2);
-        //        }
-        //        hold1st = popf + "";
-        //        if(hold1st.equals(sReverse(hold2nd))){
-        //            return hold1st;
-        //        }
-        //        hold1st = holdFrst;
-        //        popf = new StringBuilder(hold1st);
-        //    }
-        //    hold2nd = holdSecH;
-        //    pop = new StringBuilder(hold2nd);
-        //}
-
         for (int j = MinClamp((jIdx*2) - jumpMax*2, 0); j < N; j ++) {            
             popf = new StringBuilder(hold1st);
             if(hold1st.charAt(j) == c2) {
@@ -661,11 +629,20 @@ public class RRRSortingAPI {
                 pc1 = cFinddif(hold1st, hold2nd);
                 pc2 = cFinddif(hold2nd, hold1st);
                 if(pc1 == pc2 && pc1 == '!' ){
-                    if(isPali(hold1st)){
+                    if(isPali(hold1st) && cntSame(hold1st, holdFrst) == 0 ){
                         return hold1st;
                     } else if (isPali(hold2nd)) {
                         return hold2nd;
                     }
+                    if(hold1st.equals(hold2nd)) {
+                        break;
+                    }
+                    if(cntSame(hold1st, holdFrst) > cntSame(hold2nd, holdSecH)){
+                        return hold2nd;
+                    } else {
+                        return sReverse(hold1st);
+                    }
+
                 }  
                 hold2nd= holdSecH;
                 pop = new StringBuilder(hold2nd);
@@ -677,6 +654,21 @@ public class RRRSortingAPI {
         return "x";
     }
 
+    /**
+     * This method takes in 2 strings and returns the first index where they are the same  
+     * @param h1 first string to compare
+     * @param hf second string to compare
+     * @return the number of characters that are the same
+     */
+    public int cntSame(String h1, String hf) {
+        int count = 0;
+        for (int i = 0; i < h1.length(); i++) {
+            if(h1.charAt(i) == hf.charAt(i)) {
+                return count;
+            }
+        }
+        return count;
+    }
 
     /**
      * Checks if string is palindrome
