@@ -1,6 +1,12 @@
 
 public class RRRSortingAPI {
-  
+    private int p1nSwapsMin;
+    private int p2nSwapsMax;
+    private int p3sblenMin;
+    private int p4sbLenMax;
+    private int p5jmpMin;
+    private int p6jmpMax;
+    private int p7strLength;
     /**
      * Equality condition for comparables
      * @param v first comparable
@@ -209,12 +215,11 @@ public class RRRSortingAPI {
      * @return Palindrome
      */
     public String mkPaliP56(String suiQP, int jMax) {
-        int jumpMax = (jMax/2) - 1;
+        int jumpMax = (jMax/2);
         String tail = "";
         String hold3 = suiQP;
         String revf, revS;
         String holdFrst, holdSecH;
-        
         int idx = 0;
         //find Tail
         if (hold3.length() % 2 != 0) {
@@ -225,10 +230,10 @@ public class RRRSortingAPI {
         } else {
             jumpMax++;
         }
-    
         holdFrst = hold3.substring(0, hold3.length() / 2);
         holdSecH = hold3.substring((hold3.length() / 2), hold3.length());
         boolean tailStart = idx < holdFrst.length();
+        //There is maybe some redundancy hereVV
         if (holdFrst.equals(holdSecH)) {
             if(tailStart) {
                 revS = holdSecH;
@@ -424,63 +429,33 @@ public class RRRSortingAPI {
      * @return Second half;
      */
     public String makeSecondHalfP56(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
+        //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 5;
+        p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 1; p6jmpMax = 6;
+        
         RRRSortingAPI rsapi = new RRRSortingAPI();
         String firstHalf, scndHalf, hold1st, hold2nd, r1st, r2nd;
         StringBuilder pop, popf;
         //String MaybeSwaps = "";
         char c1 = '!', c2 = '!', rep;
-        int cIdx, jIdx, hAmount = 1, fAmount = 0, c1c = 0, N;
+        int cIdx1st, cIdx2nd, jIdx, hAmount = 1, fAmount = 0, c1c = 0, N;
         N = holdFrst.length();
         boolean sm1st, sm2nd;
-
-        if(jumpMax < srapiQP.length() - 2 && jumpMax >= holdSecH.length()  ) {
-            jumpMax = holdSecH.length() - 1;
-        }        
+        jumpMax = MinClamp(jumpMax, 1);
+        //Why this ^
         firstHalf = holdFrst;
         scndHalf = holdSecH;
         hold1st = holdFrst;
         hold2nd = holdSecH;
         
-        while (c1 == '!' ) {
-            rep = firstHalf.charAt(cClamp(c1c));
-            scndHalf = scndHalf.replace(rep + "", "");
-            hAmount = Math.abs(hold2nd.length() - scndHalf.length());
-            firstHalf = firstHalf.replace(rep + "", "");
-            fAmount = Math.abs(hold1st.length() - firstHalf.length());
-            if (fAmount > hAmount) {
-                c1 = rep;
-                break;
-            } else if(c1c >= N - 1 ){
-                break;
-            } 
-            firstHalf = hold1st;
-            scndHalf = hold2nd;
-            c1c++;
-        }
+        c1 = cFinddif(hold1st, hold2nd);
         System.out.println(c1);
-        hold1st = holdFrst;
-        hold2nd = holdSecH;
-        firstHalf = hold1st;
-        scndHalf = hold2nd;
         c1c = 0;
-        while (c2 == '!' ) {
-            rep = scndHalf.charAt(cClamp(c1c));
-            scndHalf = scndHalf.replace(rep + "", "");
-            hAmount = Math.abs(hold2nd.length() - scndHalf.length());
-            firstHalf = firstHalf.replace(rep + "", "");
-            fAmount = Math.abs(hold1st.length() - firstHalf.length());
-            if (hAmount > fAmount) {
-                c2 = rep;
-                break;
-            } else if(c1c >= N - 1 ){
-                break;
-            }
-            firstHalf = hold1st;
-            scndHalf = hold2nd;
-            c1c++;
-        }
+        c2 = cFinddif(hold2nd, hold1st);
         System.out.println(c2);
         jIdx = rsapi.MinClamp(jumpMax - 1, 0);
+        if(srapiQP.length() % 2 == 0) {
+            jIdx--;
+        }
         if(c1 == c2 && c1 == '!') {
         sm1st = hold1st.equals(srapiQP.substring(0, N ));
         sm2nd = hold2nd.equals(srapiQP.substring(N,srapiQP.length()));
@@ -489,19 +464,41 @@ public class RRRSortingAPI {
             }
             return hold2nd; 
         } else {
-            popf = new StringBuilder(hold1st);
-            pop = new StringBuilder(hold2nd);
-            cIdx = hold1st.indexOf(c1);
-            popf.setCharAt(cIdx, c2);
-            hold1st = popf + "";
-//            if(c2 == hold2nd.charAt(jIdx)) {
-            if(false) {
-                cIdx = jIdx;
-            } else {
-                cIdx = hold2nd.indexOf(c2);
+            pop = new StringBuilder(hold2nd);        
+            for (int i = jIdx; i >= p5jmpMin - 1; i--) {
+                if (i == 0) {
+                    System.out.println("");
+                }
+                pop.setCharAt(i, c1);
+                hold2nd = pop + "";
+                if(hold2nd.equals(hold1st)){
+                    return hold2nd;
+                }
+                popf = new StringBuilder(hold1st);
+                for (int j = MinClamp((i*2) - jumpMax*2, 1); j < N; j ++) {
+                    popf.setCharAt(j, c2);
+                    hold1st = popf + "";
+                    if(hold1st.equals(hold2nd)){
+                        return hold2nd;
+                    }
+                    hold1st = holdFrst;
+                    popf = new StringBuilder(hold1st);
+                }
+                hold2nd = holdSecH;
+                pop = new StringBuilder(hold2nd);
             }
-            pop.setCharAt(cIdx, c1);
+            popf = new StringBuilder(hold1st);
+                        
+            cIdx2nd = hold2nd.indexOf(c2);
+            pop.setCharAt(cIdx2nd, c1);
             hold2nd = pop + "";
+
+            cIdx1st = hold1st.indexOf(c1);
+            popf.setCharAt(cIdx1st, c2);            
+            hold1st = popf + "";
+
+
+
             if(hold2nd.equals(hold1st)) {
                 return hold1st;
             } else {
@@ -509,6 +506,66 @@ public class RRRSortingAPI {
             }
         }
     }
+    
+    public char cFinddif(String h2nd, String h1st) {
+        char rep, cd = '!';
+        String t2nd = h2nd, t1st = h1st;
+        int  h1stAmount, h2ndAmount, iChar = 0, N = h1st.length();
+        while (cd == '!' ) {
+                rep = t2nd.charAt(cClamp(iChar));
+                t2nd = t2nd.replace(rep + "", "");
+                h2ndAmount = Math.abs(h2nd.length() - t2nd.length());
+                t1st = t1st.replace(rep + "", "");
+                h1stAmount = Math.abs(h1st.length() - t1st.length());
+                if (h2ndAmount > h1stAmount) {
+                    cd = rep;
+                    break;
+                } else if(iChar >= N - 1 ){
+                    break;
+                }
+                t1st = h1st;
+                t2nd = h2nd;
+                iChar++;
+            }
+        return cd;
+    }
+
+    public String oneSwapleft (String holdFrst, String holdSecH, int jumpMax, char c1, char c2) {
+        String hold1st = holdFrst, hold2nd = holdSecH;
+        StringBuilder pop = new StringBuilder(hold2nd), popf;
+        
+        int N = hold1st.length(), jIdx = MinClamp(jumpMax - 1, 0);
+        for (int i = jIdx; i >= p5jmpMin - 1; i--) {
+            if (i == 0) {
+                System.out.println("");
+            }
+            pop.setCharAt(i, c1);
+            hold2nd = pop + "";
+            if(hold2nd.equals(hold1st)){
+                return hold2nd;
+            }
+            popf = new StringBuilder(hold1st);
+            for (int j = MinClamp((i*2) - jumpMax*2, 1); j < N; j ++) {
+                popf.setCharAt(j, c2);
+                hold1st = popf + "";
+                if(hold1st.equals(hold2nd)){
+                    return hold2nd;
+                }
+                hold1st = holdFrst;
+                popf = new StringBuilder(hold1st);
+            }
+            hold2nd = holdSecH;
+            pop = new StringBuilder(hold2nd);
+        }
+        return "x";
+    }
+
+
+    /**
+     * Checks if string is palindrome
+     * @param pali Potential palindrome
+     * @return true if the string is a palindrome and false otherwise
+     */
     public static boolean isPali(String pali) {
         int j = 0;
         for (int i = 0; i < pali.length()/2; i++) {

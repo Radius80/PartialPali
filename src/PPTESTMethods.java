@@ -57,7 +57,6 @@ public class PPTESTMethods {
             System.out.println("YAAAAAAATAAAAAAAA");
         }
         
-        
         //String [] Swaps = new String[line.length()]; Swaps = qptm.cMakeMpP57(line, pali, arrIdx, dosJmx); System.out.println(ssapi.lstTARRAYString(Swaps));
 
         //qptm.doAllSubs();
