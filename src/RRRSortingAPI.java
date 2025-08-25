@@ -527,7 +527,7 @@ public class RRRSortingAPI {
     public String makeSecondHalfP57(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
         //p5jmpMin = 1; p6jmpMax = 5;
         //p1nSwapsMin = 2; p2nSwapsMax = 4; p5jmpMin = 2; p6jmpMax = 14;
-         p5jmpMin = 1; p6jmpMax = 6;
+        p5jmpMin = 1; p6jmpMax = 6;
         //p1nSwapsMin = 1; p2nSwapsMax = 91; p5jmpMin = 1; p6jmpMax = 1;
         
         String hold1st, hold2nd, swap1l;
@@ -596,35 +596,75 @@ public class RRRSortingAPI {
         return cd;
     }
 
+    /**
+     * This method takes the hold second as lne and if the corresponding
+     * digit in hold1st is correct it edits the string so that the program 
+     * leaves it alone
+     * 
+     * @param lne This is the string where the substitution will happen
+     * @param pali This is the string value that is used to check for duplicates
+     * @return Alternate version of lne with dashes where it coinsides with pali
+     */
+    public static String SameSamen(String lne, String pali) {
+        StringBuilder nsbLine = new StringBuilder(lne);
+        int N = lne.length();
+        for (int j = 0; j < N; j++) {
+            if (lne.charAt(j) == pali.charAt(N-j-1) && j == N-j-1) {
+                nsbLine.setCharAt(j, 'n');
+                lne = nsbLine + "";
+                break;
+            }
+        }
+        return lne;
+    }
+
+    /**
+     * dontC don't swap character
+     * dontCsk don't swap skip
+     * @param holdFrst
+     * @param holdSecH
+     * @param jumpMax
+     * @param c1
+     * @param c2
+     * @return
+     */
     public String oneSwapleft (String holdFrst, String holdSecH, int jumpMax, char c1, char c2) {
-        String hold1st = holdFrst, hold2nd = holdSecH;
+        String hold1st = holdFrst, nshold2nd = holdSecH, hold2nd = holdSecH ;
         StringBuilder pop = new StringBuilder(hold2nd), popf;
-        char pc1, pc2;
+        char pc1, pc2, dontC, dontCsk;
         int N = hold1st.length(), jIdx = MinClamp(jumpMax - 1, 0);
+        boolean eQua = false;
         if(p8QP.length() % 2 == 0) {
             jIdx--;
         }
         for (int j = MinClamp((jIdx*2) - jumpMax*2, 0); j < N; j ++) {            
+
+            nshold2nd = SameSamen(hold2nd, hold1st);
+            dontC = nshold2nd.charAt(j);
+            dontCsk = nshold2nd.charAt(MaxClamp(j + 1, N-1));
             popf = new StringBuilder(hold1st);
-            if(hold1st.charAt(j) == c2) {
+
+            if(hold1st.charAt(j) == c2 && dontCsk != 'n') {
                 popf.setCharAt(MaxClamp(j + 1, N -1), c2);
-            } else {
-            popf.setCharAt(j, c2);
+                hold1st = popf + "";
+            } else if(dontC != 'n'){
+                popf.setCharAt(j, c2);
+                hold1st = popf + "";
             }
-            hold1st = popf + "";
+            
             if(isPali(hold1st) && hold1st.equals(hold2nd)){
                 return hold1st;
             }
         
             for (int i = jIdx; i >= p5jmpMin - 1; i--) {        
-                if(hold2nd.charAt(i) == c1) {
+                dontC = nshold2nd.charAt(i);
+                dontCsk = nshold2nd.charAt(MinClamp(i-1, 0));
+                if(hold2nd.charAt(i) == c1 && dontCsk != 'n') {
                     pop.setCharAt(MinClamp(i - 1, 0), c1);
-                } else {
+                    hold2nd = pop + "";
+                } else if (dontC != 'n') {
                     pop.setCharAt(i, c1);
-                }
-                hold2nd = pop + "";
-                if(hold2nd.equals(sReverse(hold1st))){
-                    return hold2nd;
+                    hold2nd = pop + "";
                 }
                 pc1 = cFinddif(hold1st, hold2nd);
                 pc2 = cFinddif(hold2nd, hold1st);
@@ -633,16 +673,17 @@ public class RRRSortingAPI {
                         return hold1st;
                     } else if (isPali(hold2nd)) {
                         return hold2nd;
-                    }
-                    if(hold1st.equals(hold2nd)) {
-                        break;
-                    }
-                    if(cntSame(hold1st, holdFrst) > cntSame(hold2nd, holdSecH)){
+                    } else if (hold1st.equals(sReverse(hold2nd))) {
                         return hold2nd;
-                    } else {
-                        return sReverse(hold1st);
                     }
-
+                    eQua = hold1st.equals(hold2nd);
+                    if( !eQua) {
+                        if(cntSame(hold1st, holdFrst) > cntSame(hold2nd, holdSecH)){
+                            return hold2nd;
+                        } else {
+                            return sReverse(hold1st);
+                        }
+                    }
                 }  
                 hold2nd= holdSecH;
                 pop = new StringBuilder(hold2nd);
