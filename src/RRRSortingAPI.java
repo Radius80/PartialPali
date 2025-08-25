@@ -527,8 +527,8 @@ public class RRRSortingAPI {
     public String makeSecondHalfP57(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
         //p5jmpMin = 1; p6jmpMax = 5;
         //p1nSwapsMin = 2; p2nSwapsMax = 4; p5jmpMin = 2; p6jmpMax = 14;
-        p5jmpMin = 1; p6jmpMax = 6;
-        //p1nSwapsMin = 1; p2nSwapsMax = 91; p5jmpMin = 1; p6jmpMax = 1;
+        //p5jmpMin = 1; p6jmpMax = 6;
+        p1nSwapsMin = 1; p2nSwapsMax = 91; p5jmpMin = 1; p6jmpMax = 1;
         
         String hold1st, hold2nd, swap1l;
         StringBuilder pop, popf;
@@ -638,34 +638,31 @@ public class RRRSortingAPI {
             jIdx--;
         }
         for (int j = MinClamp((jIdx*2) - jumpMax*2, 0); j < N; j ++) {            
-
             nshold2nd = SameSamen(hold2nd, hold1st);
-            dontC = nshold2nd.charAt(j);
-            dontCsk = nshold2nd.charAt(MaxClamp(j + 1, N-1));
-            popf = new StringBuilder(hold1st);
-
-            if(hold1st.charAt(j) == c2 && dontCsk != 'n') {
-                popf.setCharAt(MaxClamp(j + 1, N -1), c2);
-                hold1st = popf + "";
-            } else if(dontC != 'n'){
-                popf.setCharAt(j, c2);
-                hold1st = popf + "";
+            if(hold1st.charAt(j) == c2 || nshold2nd.charAt(j) == 'n') {
+                if(j + 1 >= N) {
+                    break;
+                }
+                j ++;
             }
+            popf = new StringBuilder(hold1st);
+            popf.setCharAt(j, c2);
+            hold1st = popf + "";
             
             if(isPali(hold1st) && hold1st.equals(hold2nd)){
                 return hold1st;
             }
         
             for (int i = jIdx; i >= p5jmpMin - 1; i--) {        
-                dontC = nshold2nd.charAt(i);
-                dontCsk = nshold2nd.charAt(MinClamp(i-1, 0));
-                if(hold2nd.charAt(i) == c1 && dontCsk != 'n') {
-                    pop.setCharAt(MinClamp(i - 1, 0), c1);
-                    hold2nd = pop + "";
-                } else if (dontC != 'n') {
-                    pop.setCharAt(i, c1);
-                    hold2nd = pop + "";
+                if(hold2nd.charAt(i) == c1|| nshold2nd.charAt(i) == 'n') {
+                    if(i -1 == -1) {
+                        break;
+                    }
+                    i--;
                 }
+                pop.setCharAt(i, c1);
+                hold2nd = pop + "";
+
                 pc1 = cFinddif(hold1st, hold2nd);
                 pc2 = cFinddif(hold2nd, hold1st);
                 if(pc1 == pc2 && pc1 == '!' ){
@@ -677,7 +674,7 @@ public class RRRSortingAPI {
                         return hold2nd;
                     }
                     eQua = hold1st.equals(hold2nd);
-                    if( !eQua) {
+                    if(!eQua) {
                         if(cntSame(hold1st, holdFrst) > cntSame(hold2nd, holdSecH)){
                             return hold2nd;
                         } else {
