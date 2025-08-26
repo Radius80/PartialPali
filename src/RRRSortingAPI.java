@@ -8,6 +8,34 @@ public class RRRSortingAPI {
     private int p6jmpMax;
     private int p7strLength;
     private String p8QP;
+
+    public void testAATTCC() {
+        p5jmpMin = 1;
+        p6jmpMax = 6;
+    }
+    public void testGCGACA() {
+        p5jmpMin = 1;
+        p6jmpMax = 5;
+    }
+    public void testTTAGAAA(){
+        p5jmpMin = 1;
+        p6jmpMax = 5;
+    }
+    public void testSH4(){
+        p5jmpMin = 1;
+        p6jmpMax = 1;
+    }
+    public void testSpecial(){
+        p5jmpMin = 2;
+        p6jmpMax = 7;
+    }
+    public void testSH5(){
+        p5jmpMin = 1;
+        p6jmpMax = 6;
+    }
+
+    
+
     /**
      * Equality condition for comparables
      * @param v first comparable
@@ -429,7 +457,7 @@ public class RRRSortingAPI {
      */
     public String makeSecondHalfP56(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
         //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 5;
-        p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 1; p6jmpMax = 6;
+        //p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 1; p6jmpMax = 6;
         //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 6;
         
         String hold1st, hold2nd;
@@ -525,16 +553,11 @@ public class RRRSortingAPI {
      * @return Second half;
      */
     public String makeSecondHalfP57(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
-        //p5jmpMin = 1; p6jmpMax = 5;
-        //p1nSwapsMin = 2; p2nSwapsMax = 4; p5jmpMin = 2; p6jmpMax = 14;
-        //p5jmpMin = 1; p6jmpMax = 6;
-        p1nSwapsMin = 1; p2nSwapsMax = 91; p5jmpMin = 1; p6jmpMax = 1;
         
         String hold1st, hold2nd, swap1l;
         StringBuilder pop, popf;
         char c1 = '!', c2 = '!';
-        int cIdx1st, cIdx2nd, N;
-        N = holdFrst.length();
+        int cIdx1st, cIdx2nd;
         jumpMax = MinClamp(jumpMax, 1);
         //Why this ^ 
         hold1st = holdFrst;
@@ -542,7 +565,7 @@ public class RRRSortingAPI {
         p8QP = srapiQP;
         c1 = cFinddif(hold1st, hold2nd);
         c2 = cFinddif(hold2nd, hold1st);
-        if(c1 == c2 && c1 == '!') {
+        if(c1 == c2 && c1 == '!' ) {
             if(p6jmpMax == 1) {
                 return hold2nd;
             } 
@@ -552,23 +575,42 @@ public class RRRSortingAPI {
                 return hold2nd;
             } else if(hold2nd.equals(sReverse(hold1st))) {
                 return hold2nd;
+            }
+            if(p8QP.startsWith(hold1st)){
+                return sReverse(hold1st);
             } 
-            return hold2nd;
+            if(p6jmpMax > 2 && p8QP.charAt(p8QP.length() - 1) == hold2nd.charAt(hold2nd.length() - 1)){
+                return hold2nd;
+            }else {
+                return sReverse(hold2nd);
+            }
         } if( p6jmpMax > 1) {
             swap1l = oneSwapleft(holdFrst, holdSecH, jumpMax, c1, c2);
             if(!swap1l.equals("x")){
                 return swap1l;
             }
-        } 
-        cIdx2nd = hold2nd.indexOf(c2);
-        pop = new StringBuilder(hold2nd);
-        pop.setCharAt(cIdx2nd, c1);
-        hold2nd = pop + "";
-        cIdx1st = hold1st.indexOf(c1);
-        popf = new StringBuilder(hold1st);
-        popf.setCharAt(cIdx1st, c2);
-        hold1st = popf + "";
+            cIdx2nd = hold2nd.lastIndexOf(c2);
+            cIdx1st = hold1st.indexOf(c1);
+            
+            pop = new StringBuilder(hold2nd);            
+            pop.setCharAt(cIdx2nd, c1);
+            hold2nd = pop + "";
 
+            popf = new StringBuilder(hold1st);
+            popf.setCharAt(cIdx1st, c2);
+            hold1st = popf + "";
+        } else {
+            //jmpMx == 1
+            cIdx2nd = hold2nd.indexOf(c2);
+            pop = new StringBuilder(hold2nd);
+            pop.setCharAt(cIdx2nd, c1);
+            hold2nd = pop + "";
+
+            cIdx1st = hold1st.indexOf(c1);
+            popf = new StringBuilder(hold1st);
+            popf.setCharAt(cIdx1st, c2);
+            hold1st = popf + "";
+        }
         return makeSecondHalfP57(srapiQP, hold1st, hold2nd, jumpMax);
     }
 
@@ -631,12 +673,12 @@ public class RRRSortingAPI {
     public String oneSwapleft (String holdFrst, String holdSecH, int jumpMax, char c1, char c2) {
         String hold1st = holdFrst, nshold2nd = holdSecH, hold2nd = holdSecH ;
         StringBuilder pop = new StringBuilder(hold2nd), popf;
-        char pc1, pc2, dontC, dontCsk;
+        char pc1, pc2;
         int N = hold1st.length(), jIdx = MinClamp(jumpMax - 1, 0);
-        boolean eQua = false;
         if(p8QP.length() % 2 == 0) {
             jIdx--;
         }
+        
         for (int j = MinClamp((jIdx*2) - jumpMax*2, 0); j < N; j ++) {            
             nshold2nd = SameSamen(hold2nd, hold1st);
             if(hold1st.charAt(j) == c2 || nshold2nd.charAt(j) == 'n') {
@@ -672,14 +714,6 @@ public class RRRSortingAPI {
                         return hold2nd;
                     } else if (hold1st.equals(sReverse(hold2nd))) {
                         return hold2nd;
-                    }
-                    eQua = hold1st.equals(hold2nd);
-                    if(!eQua) {
-                        if(cntSame(hold1st, holdFrst) > cntSame(hold2nd, holdSecH)){
-                            return hold2nd;
-                        } else {
-                            return sReverse(hold1st);
-                        }
                     }
                 }  
                 hold2nd= holdSecH;
