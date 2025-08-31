@@ -278,6 +278,31 @@ public class RRRSortingAPI {
     }
 
     /**
+     * Make same half
+     * Swaps characters until two strings are the same
+     * @param h1 Fist half or string 1
+     * @param h2 Second half string 2
+     * @return same version
+     */
+    public String makeSameh( String h1, String h2 ){
+        int N = h1.length()*2, i = 0, j = 0, k = 0;
+        String hh1 = h1, hh2 = h2, f = hh1 + hh2;
+        char bubhold = ' ';
+        StringBuilder h1b = new StringBuilder(hh1), h2b = new StringBuilder(hh2);
+        while(!hh1.equals(sReverse(hh2))) {
+            j = MinClamp(N - i - 1, 0);
+            k = MaxClamp(i + 1, N - 1);
+            if(f.charAt(i) != f.charAt(j)){
+                bubhold = f.charAt(i);
+                
+            }
+
+            
+        }
+        return hh2;
+    }
+
+    /**
      * This function replaces characters in lne that apears in the same char index
      * as pali
      * 
@@ -554,7 +579,7 @@ public class RRRSortingAPI {
      */
     public String makeSecondHalfP57(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
         
-        String hold1st, hold2nd, swap1l;
+        String hold1st, hold2nd, swap1l, checkStr;
         StringBuilder pop, popf;
         char c1 = '!', c2 = '!';
         int cIdx1st, cIdx2nd;
@@ -565,6 +590,7 @@ public class RRRSortingAPI {
         p8QP = srapiQP;
         c1 = cFinddif(hold1st, hold2nd);
         c2 = cFinddif(hold2nd, hold1st);
+        checkStr = hold2nd.substring(0, (hold2nd.length()/2) + 1);
         if(c1 == c2 && c1 == '!' ) {
             if(p6jmpMax == 1) {
                 return hold2nd;
@@ -578,10 +604,15 @@ public class RRRSortingAPI {
             }
             if(p8QP.startsWith(hold1st)){
                 return sReverse(hold1st);
+            }
+            if(p8QP.endsWith(sReverse(checkStr))) {
+                return sReverse(hold2nd);
             } 
             if(p6jmpMax > 2 && p8QP.charAt(p8QP.length() - 1) == hold2nd.charAt(hold2nd.length() - 1)){
                 return hold2nd;
-            }else {
+            }else if (hold1st.charAt(1) == p8QP.charAt(1)) {
+                return hold1st;
+            } else {
                 return sReverse(hold2nd);
             }
         } if( p6jmpMax > 1) {
@@ -591,6 +622,9 @@ public class RRRSortingAPI {
             }
             cIdx2nd = hold2nd.lastIndexOf(c2);
             cIdx1st = hold1st.indexOf(c1);
+            if(cIdx1st != 0) {
+            cIdx1st = hold1st.lastIndexOf(c1);
+            }
             
             pop = new StringBuilder(hold2nd);            
             pop.setCharAt(cIdx2nd, c1);
@@ -759,7 +793,8 @@ public class RRRSortingAPI {
     }
 
     public static void main(String[] args) {
-
+        RRRSortingAPI me = new RRRSortingAPI();
+        System.out.println(me.makeSecondHalfP57("GTTCGCA", "GTT", "GCG", 6));
     }
 
 }

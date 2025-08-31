@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "type": "java",
             "name": "TestMethods",
@@ -30,6 +31,13 @@
             "request": "launch",
             "mainClass": "ZZZTestcodetoCommit",
             "projectName": "22006710-RW214-project_c078e3db"
+        },
+        
+        {
+            "type": "java",
+            "name": "test sorting",
+            "request": "launch",
+            "mainClass": "RRRSortingAPI",
         }
     ]
 }
