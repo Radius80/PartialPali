@@ -321,210 +321,7 @@ public class RRRSortingAPI {
         return lne;
     }
 
-     /**
-     * Males the second half if the second half is made it can just use that to
-     * make the rest
-     *
-     * After the integer initialization the half jump length is worked out.
-     * EXAMPLE: if jumplength is 4 QP = ACGTGTCA the palindrome is then:
-     * ACGTTGCA and the correct second half is TGCA so the jump length should be
-     * something like 2 depending on the QP
-     * 
-     * The QP is then split into 2 equal length parts and their values are coppied
-     * to be called again after editing.
-     * 
-     * So then we want to see what in the second half appears in the first half.
-     * So to see if the longest jump switch is the correct one a charracter rep
-     * is set to the value of what the second position would be but in second half
-     * form.
-     * hAmount (The amount of times it occurs in the subset) is then calculated
-     * by subtracting the origional secondhalf length with the half length after
-     * that the all the characters equal to rep is removed from the second half.
-     * 
-     * fAmount(the amount of times rep occurs in the first half) is then calculated the
-     * same way.
-     * 
-     * 
-     * It is now possible to understand the condition inside the while brackets.
-     * This algorythm runs until the quantities of the unique digits in the second
-     * half is equal to the quantities in of the same digits in the first half.
-     * 
-     * So inside the while the rep is the fist character in the secondlf of the string
-     * Inside the while it skips the digits where there are equal amount of them in 
-     * the first half and the second
-     * 
-     * Then in the if after pop declaration if(the amount the digit occurs in the
-     * second half is more than the first half), which means a digit from the first
-     * half needs to be sent to the second half and the postion it is sent is to 
-     * the altered jump length
-     * 
-     * 
-     * else (if that digit occurs more in the first string ):
-     * The first half just gets the rep concatenated at left side of the
-     * firsthalf string
-     * 
-     * So then it often performs more actions than the half string are long
-     * which is where the jump length should be adjusted accordingly
-     * 
-     * @param srapiQP Quazipalindrome
-     * @param jumMax JumpMax
-     * @return Second half;
-     */
-    public String makeSecondHalfP5(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
-        String firstHalf, scndHalf;
-        StringBuilder pop, popf;
-        String hold3 = srapiQP;
-        //String MaybeSwaps = "";
-        char rep;
-        int hAmount = 1, fAmount = 0, jumpH, countOPs = 0;
-        jumpH = (jumpMax / 2) - 1;
-
-
-        if(jumpMax < srapiQP.length() - 2 && jumpMax >= holdSecH.length()  ) {
-            jumpH = holdSecH.length() - 1;
-        }
-        
-        firstHalf = holdFrst;
-        scndHalf = holdSecH;
-        while (hAmount != fAmount) {
-            rep = scndHalf.charAt(cClamp(jumpH - 1));
-
-            scndHalf = scndHalf.replace(rep + "", "");
-            hAmount = Math.abs(holdSecH.length() - scndHalf.length());
-            firstHalf = firstHalf.replace(rep + "", "");
-            fAmount = Math.abs(holdFrst.length() - firstHalf.length());
-            while (fAmount == hAmount && scndHalf.length() > 0) {
-                rep = scndHalf.charAt(cClamp(0));
-                scndHalf = scndHalf.replace(rep + "", "");
-                hAmount = Math.abs(holdSecH.length() - scndHalf.length());
-                firstHalf = firstHalf.replace(rep + "", "");
-                fAmount = Math.abs(holdFrst.length() - firstHalf.length());
-            }
-            pop = new StringBuilder(holdSecH);
-            popf = new StringBuilder(holdFrst);
-
-            if (fAmount < hAmount) {
-                pop.setCharAt(cClamp(jumpH - 1), firstHalf.charAt(0));
-                holdSecH = pop + "";
-                popf.setCharAt(0, rep);
-                holdFrst = popf + "";
-                firstHalf = holdFrst;
-                scndHalf = holdSecH;
-            } else if (hAmount > fAmount) {
-                firstHalf = rep + firstHalf;
-            }
-            countOPs ++;
-            if (countOPs > holdSecH.length()) {
-                jumpH = MinClamp(jumpH -1 , 0);
-                countOPs = 0;
-                holdFrst = hold3.substring(0, hold3.length() / 2);
-                holdSecH = hold3.substring((hold3.length() / 2), hold3.length());
-                firstHalf = holdFrst;
-                scndHalf = holdSecH;
-            }
-        }
-        return holdSecH;
-    }
-
-
     /**
-     * Males the second half if the second half is made it can just use that to
-     * make the rest
-     *
-     * After the integer initialization the half jump length is worked out.
-     * EXAMPLE: if jumplength is 4 QP = ACGTGTCA the palindrome is then:
-     * ACGTTGCA and the correct second half is TGCA so the jump length should be
-     * something like 2 depending on the QP
-     * 
-     * jIdx is an acronym for jumpIdx
-     * 
-     * The QP is then split into 2 equal length parts and their values are coppied
-     * to be called again after editing.
-     * if there is the same amount of each unique digit in the first and second half
-     * the second half is the correct order it seems 
-     * So then we want to see what in the second half appears in the first half.
-     * So to see if the longest jump switch is the correct one a charracter rep
-     * is set to the value of what the second position would be but in second half
-     * form.
-     * hAmount (The amount of times it occurs in the subset) is then calculated
-     * by subtracting the origional secondhalf length with the half length after
-     * that the all the characters equal to rep is removed from the second half.
-     * 
-     * fAmount(the amount of times rep occurs in the first half) is then calculated the
-     * same way.
-     * 
-     * 
-     * It is now possible to understand the condition inside the while brackets.
-     * This algorythm runs until the quantities of the unique digits in the second
-     * half is equal to the quantities in of the same digits in the first half.
-     * 
-     * So inside the while the rep is the fist character in the secondlf of the string
-     * Inside the while it skips the digits where there are equal amount of them in 
-     * the first half and the second
-     * 
-     * Then in the if after pop declaration if(the amount the digit occurs in the
-     * second half is more than the first half), which means a digit from the first
-     * half needs to be sent to the second half and the postion it is sent is to 
-     * the altered jump length
-     * 
-     * 
-     * else (if that digit occurs more in the first string ):
-     * The first half just gets the rep concatenated at left side of the
-     * firsthalf string
-     * 
-     * So then it often performs more actions than the half string are long
-     * which is where the jump length should be adjusted accordingly
-     * TGTCGC
-     * CGTTGC 
-     * @param srapiQP Quazipalindrome
-     * @param jumMax JumpMax
-     * @return Second half;
-     */
-    public String makeSecondHalfP56(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
-        //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 5;
-        //p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 1; p6jmpMax = 6;
-        //p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 6;
-        
-        String hold1st, hold2nd;
-        StringBuilder pop, popf;
-        char c1 = '!', c2 = '!';
-        int cIdx1st, cIdx2nd, N;
-        N = holdFrst.length();
-        boolean sm1st, sm2nd;
-        jumpMax = MinClamp(jumpMax, 1);
-        //Why this ^
-        hold1st = holdFrst;
-        hold2nd = holdSecH;
-        p8QP = srapiQP;
-        c1 = cFinddif(hold1st, hold2nd);
-        c2 = cFinddif(hold2nd, hold1st);
-        if(c1 == c2 && c1 == '!') {
-        sm1st = hold1st.equals(srapiQP.substring(0, N ));
-        sm2nd = hold2nd.equals(srapiQP.substring(N,srapiQP.length()));
-            if(sm1st & !sm2nd) {
-                return sReverse(hold1st);
-            }
-            return hold2nd; 
-        } else {
-            String swap1l = oneSwapleft(holdFrst, holdSecH, jumpMax, c1, c2);
-            if (!swap1l.equals("x")){
-                return swap1l;
-            }
-            cIdx2nd = hold2nd.indexOf(c2);
-            pop = new StringBuilder(hold2nd);
-            pop.setCharAt(cIdx2nd, c1);
-            hold2nd = pop + "";
-
-            cIdx1st = hold1st.indexOf(c1);
-            popf = new StringBuilder(hold1st);
-            popf.setCharAt(cIdx1st, c2);
-            hold1st = popf + "";
-
-            return makeSecondHalfP56(srapiQP, hold1st, hold2nd, jumpMax);
-        }
-    }
-    
-        /**
      * Males the second half if the second half is made it can just use that to
      * make the rest
      *
@@ -579,7 +376,7 @@ public class RRRSortingAPI {
      */
     public String makeSecondHalfP57(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
         
-        String hold1st, hold2nd, swap1l, checkStr;
+        String hold1st, hold2nd, swap1l, chStr2nd, chStr1st;
         StringBuilder pop, popf;
         char c1 = '!', c2 = '!';
         int cIdx1st, cIdx2nd;
@@ -590,7 +387,8 @@ public class RRRSortingAPI {
         p8QP = srapiQP;
         c1 = cFinddif(hold1st, hold2nd);
         c2 = cFinddif(hold2nd, hold1st);
-        checkStr = hold2nd.substring(0, (hold2nd.length()/2) + 1);
+        chStr2nd = hold2nd.substring(0, (hold2nd.length()/2) + 1);
+        chStr1st = hold1st.substring(0, (hold1st.length()/2) + 1);
         if(c1 == c2 && c1 == '!' ) {
             if(p6jmpMax == 1) {
                 return hold2nd;
@@ -602,16 +400,16 @@ public class RRRSortingAPI {
             } else if(hold2nd.equals(sReverse(hold1st))) {
                 return hold2nd;
             }
-            if(p8QP.startsWith(hold1st)){
-                return sReverse(hold1st);
+            swap1l = endsWith(chStr2nd, hold2nd, hold1st);
+            if(!swap1l.equals("x")){
+                return swap1l;
             }
-            if(p8QP.endsWith(sReverse(checkStr))) {
-                return sReverse(hold2nd);
-            } 
-            if(p6jmpMax > 2 && p8QP.charAt(p8QP.length() - 1) == hold2nd.charAt(hold2nd.length() - 1)){
+            swap1l = stWith(chStr1st, hold1st);
+            if(!swap1l.equals("x")){
+                return swap1l;
+            }
+            if(p8QP.charAt(p8QP.length() - 1) == hold2nd.charAt(hold2nd.length() - 1)){
                 return hold2nd;
-            }else if (hold1st.charAt(1) == p8QP.charAt(1)) {
-                return hold1st;
             } else {
                 return sReverse(hold2nd);
             }
@@ -647,6 +445,42 @@ public class RRRSortingAPI {
         }
         return makeSecondHalfP57(srapiQP, hold1st, hold2nd, jumpMax);
     }
+
+    /**
+     * This method is used to see if the method makeSecondhalf
+     * should return the second half depending on if the 
+     * origional QP ends with somehow with the second 
+     * half of the output
+     * @param ch2 A shortend checkStr to be checked if QP ends with it
+     * @param h2 The full second half
+     * @return the correct second half.
+     */
+    public String endsWith(String ch2, String h2, String h1){
+        String check2 = ch2;
+        if(p8QP.endsWith(sReverse(check2))) {
+            return sReverse(h2);
+        }
+        check2 = h2.substring(h2.length()/2, h2.length() );
+        if(p8QP.endsWith(check2)){
+            return h2;
+        } 
+
+        return "x";
+    }
+
+    public String stWith(String ch1, String h1) {
+        String check1 = ch1;
+        char cQP1 = p8QP.charAt(0), cQP2 = p8QP.charAt(p8QP.length()-1);
+        char cCp1 = check1.charAt(0);
+        if(p8QP.startsWith(ch1) ){
+            if(cCp1 == cQP1 && cCp1 == cQP2) {
+                return sReverse(h1);
+            }
+            return h1;
+        }
+        return "x";
+    }    
+
 
 
     public char cFinddif(String h2nd, String h1st) {
