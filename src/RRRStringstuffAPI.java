@@ -19,6 +19,26 @@ public class RRRStringstuffAPI {
     }
 
     /**
+     * This function replaces characters in lne that apears in the same char index
+     * as pali
+     * 
+     * @param lne This is the string where the substitution will happen
+     * @param pali This is the string value that is used to check for duplicates
+     * @return Alternate version of lne with dashes where it coinsides with pali
+     */
+    public static String SameSame(String lne, String pali) {
+        StringBuilder nsbLine = new StringBuilder(lne);
+        for (int j = 0; j < lne.length(); j++) {
+            if (lne.charAt(j) == pali.charAt(j)) {
+                nsbLine.setCharAt(j, '-');
+                lne = nsbLine + "";
+            }
+        }
+        return lne;
+    }
+
+
+    /**
      * Print contents of array at the moment it only works with int arrays a
      * useful abstraction to make is to let any data type be available to enter
      *
@@ -85,6 +105,35 @@ public class RRRStringstuffAPI {
         System.out.println("");
 
     }
+
+    /**
+     * Reveses String
+     *
+     * @param sHalf String to be reverse
+     * @return Reversed String.
+     */
+    public String sReverse(String sHalf) {
+        String output = "";
+        for (int i = 0; i < sHalf.length(); i++) {
+            output = sHalf.charAt(i) + output;
+        }
+        return output;
+    }
+
+    /**
+     * Prints the mapped string
+     * @param order the bijection map
+     * @param str The origional String
+     * @return The string mapped with the sequence 
+     */
+    public String printStr(Comparable[] order, String str) {
+        String output = "";
+        for (int i = 0; i < str.length(); i++) {
+            output = output + str.charAt((int) order[i]);
+        }
+        return output;
+    }
+
 
     /**
      * Method to print the order of a priority que for string 

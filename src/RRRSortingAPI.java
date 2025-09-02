@@ -60,39 +60,19 @@ public class RRRSortingAPI {
 
     public int getP2(String lne, char pop, int j, int i, int mx) {
     int p2 = lne.lastIndexOf(pop);
+    RRRMathAPI mapi = new RRRMathAPI();
         if(Math.abs(p2 - i) > mx) {
-            p2 = MinClamp(lne.lastIndexOf(pop, j), 0); 
+            p2 = mapi.MinClamp(lne.lastIndexOf(pop, j), 0); 
         }
         while(p2 == 0 && (lne.charAt(0) == '^' || lne.charAt(0) == '-')) {
             j++;
-            p2 = MinClamp(lne.lastIndexOf(pop, j), 0);
+            p2 = mapi.MinClamp(lne.lastIndexOf(pop, j), 0);
         }
     return p2;
     }
 
-    public String printStr(Comparable[] order, String str) {
-        String output = "";
-        for (int i = 0; i < str.length(); i++) {
-            output = output + str.charAt((int) order[i]);
-        }
-        return output;
-    }
-
-    public String printCode(Comparable[] order) {
-        String output = "";
-        for (Comparable order1 : order) {
-            output = output + "|" + order1 + "";
-        }
-        return output;
-    }
-
-
     public static void doSwaps(String str, Comparable[] pPQ) {
-        int pos1;
-        int pos2;
-        int inx1;
-        int inx2;
-        int inx3;
+        int pos1, pos2, inx1, inx2, inx3;
         while (!str.equals("}")) {
             inx1 = ((int) str.indexOf("(")) + 1;
             inx2 = ((int) str.indexOf(","));
@@ -142,310 +122,6 @@ public class RRRSortingAPI {
     }
 
 
-
-
-
-
-    /**
-     * This is used so that itterations for arrays don't go out of bounds
-     * It clamps a potential large value to a specified maximum
-     * @param j itterator
-     * @param Max Maximum value
-     * @return The maximum between j and Max
-     */
-    public int MaxClamp(int j, int Max) {
-        if(j > Max) {
-            j = Max;
-        }
-        return j;
-    }
-
-    /**
-     * This is used so that itterations for arrays don't go out of bounds
-     * @param j itterator
-     * @param Min Minimum value
-     * @return The minimum between j and                                                                                                                        Min
-     */
-    public int MinClamp(int j, int Min) {
-        if(j < Min) {
-            j = Min;
-        }
-        return j;
-    }
-
-
-    /**
-     * Reveses String
-     *
-     * @param sHalf String to be reverse
-     * @return Reversed String.
-     */
-    public String sReverse(String sHalf) {
-        String output = "";
-        for (int i = 0; i < sHalf.length(); i++) {
-            output = sHalf.charAt(i) + output;
-        }
-        return output;
-    }
-
-    /**
-     * Finds the index of where the tail of the algorythm should be
-     * 
-     * It initializing declares both hold1 and hold2 to the full QP
-     * entered. 
-     * rep for repeat is set to the last character in the string. 
-     * To sea if it occurs an even amount all instances of rep is removed from hold3
-     * while hold2 is still safely equal to the origeonal QP.
-     * sAmount is the length of the origeonal string minus the 
-     * one with rep removed.
-     * if sAmount is uneven ((sAmount/2) *2 or nN) will not be equal to sAmount
-     * then Tail can be found to be equal to the character rep that was removed.
-     * This method is not called if QP.StringLength is even.
-     *
-     * 
-     * @param suiQP Quazipalindrome
-     * @return the index of where the tail of the QP should be
-     */
-    public int setTail(String suiQP) {
-        String hold3;
-        String hold2 = suiQP;
-        String tail = "";
-        char rep;
-        int sAmount;
-        int nN;
-        int idx = 0;
-        hold3 = suiQP;
-        while (hold3.length() > 0) {
-            rep = hold3.charAt(hold3.length() - 1);
-            hold3 = hold3.replace(rep + "", "");
-            sAmount = hold2.length() - hold3.length();
-            nN = (sAmount / 2) * 2;
-            if (sAmount != nN) {
-                tail = tail + rep;
-                idx = suiQP.indexOf(tail.charAt(0));
-                break;
-            }
-            hold2 = hold3;
-        }
-        return idx;
-    }
-
-    /**
-     * Does the sorting of the string that was entered. It does not do sorting
-     * anymore it just groups all the pares together.
-     * The first if is to define if the entered string has an even amount of
-     * digits or and odd amount.
-     * 
-     * Tail start is a condition where the tail or digit that will occur in
-     * the middle of the string is in the first half and both firsthalf and
-     * second half equal each other in that case revf is sReverse(holdFirst)
-     * @param suiQP QuaziPalindrome
-     * @param jMax Jump Maximum length
-     * @return Palindrome
-     */
-    public String mkPaliP56(String suiQP, int jMax) {
-        int jumpMax = (jMax/2);
-        String tail = "";
-        String hold3 = suiQP;
-        String revf, revS;
-        String holdFrst, holdSecH;
-        int idx = 0;
-        if (hold3.length() % 2 != 0) {
-            idx = setTail(suiQP);
-            tail = suiQP.charAt(idx) + "";
-            hold3 = hold3.substring(0, idx)
-                    + hold3.substring(idx + 1, hold3.length());
-        } else {
-            jumpMax++;
-        }
-        holdFrst = hold3.substring(0, hold3.length() / 2);
-        holdSecH = hold3.substring((hold3.length() / 2), hold3.length());
-        boolean tailStart = idx < holdFrst.length();
-        //There is maybe some redundancy hereVV
-        if (holdFrst.equals(holdSecH)) {
-            if(tailStart) {
-                revS = holdSecH;
-                revf = sReverse(revS);
-                return revf + tail + revS;
-            }
-             revf = holdFrst;
-             revS = sReverse(holdSecH);
-            return revf + tail + revS;
-        }    
-        revS = makeSecondHalfP57(suiQP, holdFrst, holdSecH, jumpMax);
-        revf = sReverse(revS);
-        return revf + tail + revS;
-    }
-
-    /**
-     * Make same half
-     * Swaps characters until two strings are the same
-     * @param h1 Fist half or string 1
-     * @param h2 Second half string 2
-     * @return same version
-     */
-    public String makeSameh( String h1, String h2 ){
-        int N = h1.length()*2, i = 0, j = 0, k = 0;
-        String hh1 = h1, hh2 = h2, f = hh1 + hh2;
-        char bubhold = ' ';
-        StringBuilder h1b = new StringBuilder(hh1), h2b = new StringBuilder(hh2);
-        while(!hh1.equals(sReverse(hh2))) {
-            j = MinClamp(N - i - 1, 0);
-            k = MaxClamp(i + 1, N - 1);
-            if(f.charAt(i) != f.charAt(j)){
-                bubhold = f.charAt(i);
-                
-            }
-
-            
-        }
-        return hh2;
-    }
-
-    /**
-     * This function replaces characters in lne that apears in the same char index
-     * as pali
-     * 
-     * @param lne This is the string where the substitution will happen
-     * @param pali This is the string value that is used to check for duplicates
-     * @return Alternate version of lne with dashes where it coinsides with pali
-     */
-    public static String SameSame(String lne, String pali) {
-        StringBuilder nsbLine = new StringBuilder(lne);
-        for (int j = 0; j < lne.length(); j++) {
-            if (lne.charAt(j) == pali.charAt(j)) {
-                nsbLine.setCharAt(j, '-');
-                lne = nsbLine + "";
-            }
-        }
-        return lne;
-    }
-
-    /**
-     * Males the second half if the second half is made it can just use that to
-     * make the rest
-     *
-     * After the integer initialization the half jump length is worked out.
-     * EXAMPLE: if jumplength is 4 QP = ACGTGTCA the palindrome is then:
-     * ACGTTGCA and the correct second half is TGCA so the jump length should be
-     * something like 2 depending on the QP
-     * 
-     * jIdx is an acronym for jumpIdx
-     * 
-     * The QP is then split into 2 equal length parts and their values are coppied
-     * to be called again after editing.
-     * if there is the same amount of each unique digit in the first and second half
-     * the second half is the correct order it seems 
-     * So then we want to see what in the second half appears in the first half.
-     * So to see if the longest jump switch is the correct one a charracter rep
-     * is set to the value of what the second position would be but in second half
-     * form.
-     * hAmount (The amount of times it occurs in the subset) is then calculated
-     * by subtracting the origional secondhalf length with the half length after
-     * that the all the characters equal to rep is removed from the second half.
-     * 
-     * fAmount(the amount of times rep occurs in the first half) is then calculated the
-     * same way.
-     * 
-     * 
-     * It is now possible to understand the condition inside the while brackets.
-     * This algorythm runs until the quantities of the unique digits in the second
-     * half is equal to the quantities in of the same digits in the first half.
-     * 
-     * So inside the while the rep is the fist character in the secondlf of the string
-     * Inside the while it skips the digits where there are equal amount of them in 
-     * the first half and the second
-     * 
-     * Then in the if after pop declaration if(the amount the digit occurs in the
-     * second half is more than the first half), which means a digit from the first
-     * half needs to be sent to the second half and the postion it is sent is to 
-     * the altered jump length
-     * 
-     * 
-     * else (if that digit occurs more in the first string ):
-     * The first half just gets the rep concatenated at left side of the
-     * firsthalf string
-     * 
-     * So then it often performs more actions than the half string are long
-     * which is where the jump length should be adjusted accordingly
-     * TGTCGC
-     * CGTTGC 
-     * @param srapiQP Quazipalindrome
-     * @param jumMax JumpMax
-     * @return Second half;
-     */
-    public String makeSecondHalfP57(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {
-        
-        String hold1st, hold2nd, swap1l, chStr2nd, chStr1st;
-        StringBuilder pop, popf;
-        char c1 = '!', c2 = '!';
-        int cIdx1st, cIdx2nd;
-        jumpMax = MinClamp(jumpMax, 1);
-        //Why this ^ 
-        hold1st = holdFrst;
-        hold2nd = holdSecH;
-        p8QP = srapiQP;
-        c1 = cFinddif(hold1st, hold2nd);
-        c2 = cFinddif(hold2nd, hold1st);
-        chStr2nd = hold2nd.substring(0, (hold2nd.length()/2) + 1);
-        chStr1st = hold1st.substring(0, (hold1st.length()/2) + 1);
-        if(c1 == c2 && c1 == '!' ) {
-            if(p6jmpMax == 1) {
-                return hold2nd;
-            } 
-            if(isPali(hold1st)) {
-                return hold1st;
-            } else if(isPali(hold2nd)) {
-                return hold2nd;
-            } else if(hold2nd.equals(sReverse(hold1st))) {
-                return hold2nd;
-            }
-            swap1l = endsWith(chStr2nd, hold2nd, hold1st);
-            if(!swap1l.equals("x")){
-                return swap1l;
-            }
-            swap1l = stWith(chStr1st, hold1st);
-            if(!swap1l.equals("x")){
-                return swap1l;
-            }
-            if(p8QP.charAt(p8QP.length() - 1) == hold2nd.charAt(hold2nd.length() - 1)){
-                return hold2nd;
-            } else {
-                return sReverse(hold2nd);
-            }
-        } if( p6jmpMax > 1) {
-            swap1l = oneSwapleft(holdFrst, holdSecH, jumpMax, c1, c2);
-            if(!swap1l.equals("x")){
-                return swap1l;
-            }
-            cIdx2nd = hold2nd.lastIndexOf(c2);
-            cIdx1st = hold1st.indexOf(c1);
-            if(cIdx1st != 0) {
-            cIdx1st = hold1st.lastIndexOf(c1);
-            }
-            
-            pop = new StringBuilder(hold2nd);            
-            pop.setCharAt(cIdx2nd, c1);
-            hold2nd = pop + "";
-
-            popf = new StringBuilder(hold1st);
-            popf.setCharAt(cIdx1st, c2);
-            hold1st = popf + "";
-        } else {
-            //jmpMx == 1
-            cIdx2nd = hold2nd.indexOf(c2);
-            pop = new StringBuilder(hold2nd);
-            pop.setCharAt(cIdx2nd, c1);
-            hold2nd = pop + "";
-
-            cIdx1st = hold1st.indexOf(c1);
-            popf = new StringBuilder(hold1st);
-            popf.setCharAt(cIdx1st, c2);
-            hold1st = popf + "";
-        }
-        return makeSecondHalfP57(srapiQP, hold1st, hold2nd, jumpMax);
-    }
-
     /**
      * This method is used to see if the method makeSecondhalf
      * should return the second half depending on if the 
@@ -457,31 +133,30 @@ public class RRRSortingAPI {
      */
     public String endsWith(String ch2, String h2, String h1){
         String check2 = ch2;
-        if(p8QP.endsWith(sReverse(check2))) {
-            return sReverse(h2);
+        RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
+        if(p8QP.endsWith(ssapi.sReverse(check2))) {
+            return ssapi.sReverse(h2);
         }
         check2 = h2.substring(h2.length()/2, h2.length() );
         if(p8QP.endsWith(check2)){
             return h2;
         } 
-
         return "x";
     }
 
     public String stWith(String ch1, String h1) {
         String check1 = ch1;
+        RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
         char cQP1 = p8QP.charAt(0), cQP2 = p8QP.charAt(p8QP.length()-1);
         char cCp1 = check1.charAt(0);
         if(p8QP.startsWith(ch1) ){
             if(cCp1 == cQP1 && cCp1 == cQP2) {
-                return sReverse(h1);
+                return ssapi.sReverse(h1);
             }
             return h1;
         }
         return "x";
     }    
-
-
 
     public char cFinddif(String h2nd, String h1st) {
         char rep, cd = '!';
@@ -529,72 +204,6 @@ public class RRRSortingAPI {
     }
 
     /**
-     * dontC don't swap character
-     * dontCsk don't swap skip
-     * @param holdFrst
-     * @param holdSecH
-     * @param jumpMax
-     * @param c1
-     * @param c2
-     * @return
-     */
-    public String oneSwapleft (String holdFrst, String holdSecH, int jumpMax, char c1, char c2) {
-        String hold1st = holdFrst, nshold2nd = holdSecH, hold2nd = holdSecH ;
-        StringBuilder pop = new StringBuilder(hold2nd), popf;
-        char pc1, pc2;
-        int N = hold1st.length(), jIdx = MinClamp(jumpMax - 1, 0);
-        if(p8QP.length() % 2 == 0) {
-            jIdx--;
-        }
-        
-        for (int j = MinClamp((jIdx*2) - jumpMax*2, 0); j < N; j ++) {            
-            nshold2nd = SameSamen(hold2nd, hold1st);
-            if(hold1st.charAt(j) == c2 || nshold2nd.charAt(j) == 'n') {
-                if(j + 1 >= N) {
-                    break;
-                }
-                j ++;
-            }
-            popf = new StringBuilder(hold1st);
-            popf.setCharAt(j, c2);
-            hold1st = popf + "";
-            
-            if(isPali(hold1st) && hold1st.equals(hold2nd)){
-                return hold1st;
-            }
-        
-            for (int i = jIdx; i >= p5jmpMin - 1; i--) {        
-                if(hold2nd.charAt(i) == c1|| nshold2nd.charAt(i) == 'n') {
-                    if(i -1 == -1) {
-                        break;
-                    }
-                    i--;
-                }
-                pop.setCharAt(i, c1);
-                hold2nd = pop + "";
-
-                pc1 = cFinddif(hold1st, hold2nd);
-                pc2 = cFinddif(hold2nd, hold1st);
-                if(pc1 == pc2 && pc1 == '!' ){
-                    if(isPali(hold1st) && cntSame(hold1st, holdFrst) == 0 ){
-                        return hold1st;
-                    } else if (isPali(hold2nd)) {
-                        return hold2nd;
-                    } else if (hold1st.equals(sReverse(hold2nd))) {
-                        return hold2nd;
-                    }
-                }  
-                hold2nd= holdSecH;
-                pop = new StringBuilder(hold2nd);
-            }
-            hold1st = holdFrst;
-            popf = new StringBuilder(hold1st);
-        }
-
-        return "x";
-    }
-
-    /**
      * This method takes in 2 strings and returns the first index where they are the same  
      * @param h1 first string to compare
      * @param hf second string to compare
@@ -627,8 +236,7 @@ public class RRRSortingAPI {
     }
 
     public static void main(String[] args) {
-        RRRSortingAPI me = new RRRSortingAPI();
-        System.out.println(me.makeSecondHalfP57("GTTCGCA", "GTT", "GCG", 6));
+
     }
 
 }

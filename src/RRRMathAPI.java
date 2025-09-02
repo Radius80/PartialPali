@@ -96,6 +96,33 @@ public class RRRMathAPI {
         choO = (int) chooo;
         return choO;
     }
+    /**
+     * This is used so that itterations for arrays don't go out of bounds
+     * It clamps a potential large value to a specified maximum
+     * @param j itterator
+     * @param Max Maximum value
+     * @return The maximum between j and Max
+     */
+    public int MaxClamp(int j, int Max) {
+        if(j > Max) {
+            j = Max;
+        }
+        return j;
+    }
+
+    /**
+     * This is used so that itterations for arrays don't go out of bounds
+     * @param j itterator
+     * @param Min Minimum value
+     * @return The minimum between j and                                                                                                                        Min
+     */
+    public int MinClamp(int j, int Min) {
+        if(j < Min) {
+            j = Min;
+        }
+        return j;
+    }
+
 
     /**
      * Returns the abselute value of an integer
