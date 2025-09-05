@@ -55,20 +55,20 @@ public class PPTESTMethods {
         //String line = "GCATATG"; String swpline = "{GCATATG=[(1,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length());  tss.testSH5();
         //String line = "GTTCGCA"; String swpline = "{GTTCGCA=[(0,2), (0,5), (3,6)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length());  tss.testSH5();
         
-        String line = "TCGCATA"; 
-        String swpline = "{TCGCATA=[(0,1), (0,4), (2,3)]}"; 
-        int dosJmx = line.length(); 
-        arrIdx = new Comparable[line.length()]; 
-        arrIdx = rsapi.flCompa(arrIdx, line.length()); 
-        tss.testSH5();
+        //String line = "TCGCATA"; 
+        //String swpline = "{TCGCATA=[(0,1), (0,4), (2,3)]}"; 
+        //int dosJmx = line.length(); 
+        //arrIdx = new Comparable[line.length()]; 
+        //arrIdx = rsapi.flCompa(arrIdx, line.length()); 
+        //tss.testSH5();
         
         //String line = "AAGCC"; String swpline = "{AAGCC=[(1,2), (2,3), (1,2), (0,1)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.tsP105cash();
         //String line = "AGTGT"; String swpline = "{AGTGT=[(0,1), (1,2), (0,1)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.tsP105cash();
 
-        Comparable [] arrIdx2 = new Comparable[line.length()]; 
-        arrIdx2 = rsapi.flCompa(arrIdx, line.length()); 
-        rsapi.doSwaps(swpline, arrIdx2);
-        System.out.println(ssapi.printStr(arrIdx2, line));
+        //Comparable [] arrIdx2 = new Comparable[line.length()]; 
+        //arrIdx2 = rsapi.flCompa(arrIdx, line.length()); 
+        //rsapi.doSwaps(swpline, arrIdx2);
+        //System.out.println(ssapi.printStr(arrIdx2, line));
         //String sPaLi = tss.mkPaliP56(line, dosJmx);
         //System.out.println(sPaLi + " " + sPaLi.equals(ssapi.printStr(arrIdx2, line)));
         //if( sPaLi.equals(ssapi.printStr(arrIdx2, line) ) ) {
@@ -117,12 +117,13 @@ public class PPTESTMethods {
         //String[] subStrings = {"TTAGAAA"}; p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 3; p6jmpMax = 6;
         //String[] subStrings = {"TCAAGCCTGCATGGA"}; p1nSwapsMin = 2; p2nSwapsMax = 4; p5jmpMin = 2; p6jmpMax = 7; tss.testSpecial();
         
-        String[] subStrings = {"ACC", "CCG", "GTT", "TTC", "ATAT", 
-        "ATATG", "CATAT", "CCGTT", "CGTTC", "GTTCG", 
-        "TTCGC", "CGTTCG", "GTTCGC", "CATATGC", "CCCGTTC", 
-        "CCGTTCG", "CGCATAT", "CGTTCGC", "GCATATG", "GTTCGCA", "TCGCATA"}; 
+        //String[] subStrings = {"ACC", "CCG", "GTT", "TTC", "ATAT", 
+        //"ATATG", "CATAT", "CCGTT", "CGTTC", "GTTCG", 
+        //"TTCGC", "CGTTCG", "GTTCGC", "CATATGC", "CCCGTTC", 
+        //"CCGTTCG", "CGCATAT", "CGTTCGC", "GCATATG", "GTTCGCA", "TCGCATA"}; 
+        //p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 3; p6jmpMax = 7; tss.testSH5();
+        String[] subStrings = {"GTTCGC"}; 
         p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 3; p6jmpMax = 7; tss.testSH5();
-
         //String[] subStrings = {"ATATG"}; p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 3; p6jmpMax = 7;
 
         RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
@@ -141,7 +142,7 @@ public class PPTESTMethods {
             if(isQPorP(gr)) {
                 dosJmx = mapi.MaxClamp(dosJmx, line.length());
                 pali = tss.mkPaliP56(line, dosJmx);
-                System.out.println(pali + " " + line);
+                System.out.println(line + " " + pali  );
                 arrSwps = new String[line.length()];
                 comLines = new Comparable[line.length()];
                 comLines = rsapi.flCompa(comLines, line.length());
@@ -340,9 +341,11 @@ public class PPTESTMethods {
                             ip1 = i;
                         }
                         rsapi.exch(arrI, ip2, ip1);
+                        
                         swapsOutput[swapC] = "(" + ip1 + "," + ip2 + ")"; 
                         mapStr = ssapi.printStr(arrI, nsLn);
                         smapStr = ssapi.printStr(arrI, lne);
+                        
                         if(smapStr.equals(pali)) {
                             swapsOutput[swapsOutput.length - 1] = swapC + "";
                             return swapsOutput;
