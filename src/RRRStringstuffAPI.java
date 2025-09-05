@@ -37,7 +37,6 @@ public class RRRStringstuffAPI {
         return lne;
     }
 
-
     /**
      * Print contents of array at the moment it only works with int arrays a
      * useful abstraction to make is to let any data type be available to enter

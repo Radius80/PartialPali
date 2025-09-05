@@ -55,7 +55,7 @@ public class testSEARCH {
     }
     public void testTTAGAAA(){
         p5jmpMin = 1;
-        p6jmpMax = 5;
+        p6jmpMax = 6;
     }
     public void testSH4(){
         p5jmpMin = 1;
@@ -228,7 +228,6 @@ public class testSEARCH {
         }
         return count;
     }
-
 
     /**
      * dontC don't swap character
