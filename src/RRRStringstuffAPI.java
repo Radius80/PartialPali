@@ -38,6 +38,26 @@ public class RRRStringstuffAPI {
     }
 
     /**
+     * This function replaces characters in lne that apears in the same char index
+     * as pali
+     * 
+     * @param lne This is the string where the substitution will happen
+     * @param pali This is the string value that is used to check for duplicates
+     * @return Alternate version of lne with dashes where it coinsides with pali
+     */
+    public static String SameSameCap(String lne, String pali) {
+        StringBuilder nsbLine = new StringBuilder(lne);
+        for (int j = 0; j < lne.length(); j++) {
+            if (lne.charAt(j) == pali.charAt(j)) {
+                nsbLine.setCharAt(j, '^');
+                lne = nsbLine + "";
+            }
+        }
+        return lne;
+    }
+
+
+    /**
      * Print contents of array at the moment it only works with int arrays a
      * useful abstraction to make is to let any data type be available to enter
      *

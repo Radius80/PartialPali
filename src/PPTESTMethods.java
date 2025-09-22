@@ -107,7 +107,7 @@ public class PPTESTMethods {
     public void doAllSubs() {
         testSEARCH tss = new testSEARCH();
         //String[] subStrings = {"AGG", "GGA", "AGGA"}; p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 1; tss.tsP105cash();
-        //String[] subStrings = {"TACGTACGGCAGCA"}; p1nSwapsMin = 1; p2nSwapsMax = 91; p5jmpMin = 1; p6jmpMax = 1; tss.testSH4();
+        String[] subStrings = {"TACGTACGGCAGCA"}; p1nSwapsMin = 1; p2nSwapsMax = 91; p5jmpMin = 1; p6jmpMax = 1; tss.testSH4();
         //String[] subStrings = {"TACGACGTGCAGCA"}; p1nSwapsMin = 1; p2nSwapsMax = 91; p5jmpMin = 1; p6jmpMax = 1; tss.testSH4();
         //String[] subStrings = {"ACGACGTGCAGCAT"}; p1nSwapsMin = 1; p2nSwapsMax = 91; p5jmpMin = 1; p6jmpMax = 1;
         //String[] subStrings = {"AATTCC"}; p1nSwapsMin = 1; p2nSwapsMax = 1; p5jmpMin = 1; p6jmpMax = 5; tss.testAATTCC();
@@ -122,8 +122,8 @@ public class PPTESTMethods {
         //"TTCGC", "CGTTCG", "GTTCGC", "CATATGC", "CCCGTTC", 
         //"CCGTTCG", "CGCATAT", "CGTTCGC", "GCATATG", "GTTCGCA", "TCGCATA"}; 
         //p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 3; p6jmpMax = 7; tss.testSH5();
-        String[] subStrings = {"GTTCGC"}; 
-        p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 3; p6jmpMax = 7; tss.testSH5();
+        //String[] subStrings = {"GTTCGC"}; 
+        //p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 3; p6jmpMax = 7; tss.testSH5();
         //String[] subStrings = {"ATATG"}; p1nSwapsMin = 1; p2nSwapsMax = 21; p5jmpMin = 3; p6jmpMax = 7;
 
         RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
@@ -146,7 +146,11 @@ public class PPTESTMethods {
                 arrSwps = new String[line.length()];
                 comLines = new Comparable[line.length()];
                 comLines = rsapi.flCompa(comLines, line.length());
-                arrSwps = cMakeMpP57(line, pali, comLines, dosJmx);
+                if(p6jmpMax > 1){
+                arrSwps = cMakeMpP58(line, pali, comLines, dosJmx);
+                } else {
+                    arrSwps = cMakeMpP57(line, pali, comLines, dosJmx);
+                }
 
                 System.out.println(ssapi.lstTARRAYString(arrSwps));
                 dosJmx = p6jmpMax;
@@ -365,6 +369,93 @@ public class PPTESTMethods {
                         }
                     }
                 } 
+            }
+        }
+        return swapsOutput;
+    }
+
+
+        /**
+     * Better algorythm to make the map sequence 
+     * SwapC is Swap count variable
+     * nsLine for (not same line) is a String of the quazipalindrome 
+     * where all the digits in the quazipalindrome that are the same
+     * as the palindrome are replaced with dashes 
+     * ex  let's say the string is  "TACGTACGGCAGCA" the palindrome is 
+     *                              "ACGACGTTGCAGCA" 
+     * nsLine is TACGTACG------
+     * nsbLine is the string builder of nsLine. 
+     * smapStr is for stopmap string. It will be checked to see if the
+     * algorhythm should terminate.
+     * End string(EndStr) is then a temperarry equivalent of nsLine
+     * All the dashes is then removed.
+     * idxx is then the first index(rank) of the character in the quazipalindrome
+     * That rank is then stored in what should be the bijection map
+     * of where the digit went from the QP to the Pali
+     * 
+     * nsLine.substring(6,7) = "G" we want two
+     * ->p6jmpMax + i + 1
+     * @param lne String entered for the palindrome program
+     * @param pali Palindrome made from the quazipalindrome
+     * @param sComAr numbered Comparable array
+     * @return Mapped comparable array (null if there are to manny swaps) 
+     */
+    public String[] cMakeMpP58(String lne, String pali, Comparable[] sComAr, int dosJmx) {
+        RRRArrayFunctions raf = new RRRArrayFunctions();
+        RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
+        RRRSortingAPI rsapi = new RRRSortingAPI();
+        String mmPali = pali, nsLn = lne, mapStr, smapStr = "]]]]]]]]]";
+        StringBuilder nsbLn, nsbPali;
+        String[] swapsOutput = new String[lne.length()];
+        Comparable[] arrI = new Comparable[sComAr.length];
+        int ip2, ip1, swapC = 0, N = lne.length(), j;
+        char curChar;
+
+        raf.CopyEmutCom(sComAr, arrI);
+        nsLn = ssapi.SameSame(nsLn, mmPali);
+        mmPali = ssapi.SameSameCap(mmPali, lne);
+        nsbLn = new StringBuilder(nsLn);
+        nsbPali = new StringBuilder(pali);
+        for (int i = 0; i < N; i++) {
+            if(nsLn.charAt(i) != '-' ) {
+            mapStr = ssapi.printStr(arrI, nsLn);
+            smapStr = ssapi.printStr(arrI, lne);
+            curChar = mapStr.charAt(i);
+              j = i + dosJmx;
+              ip2 = rsapi.getP2P58(mmPali, curChar, j, i, dosJmx);
+              ip1 = mapStr.indexOf(curChar);
+                if(Math.abs(ip2 - ip1) > dosJmx) {
+                    ip1 = ip2 - dosJmx;
+                }  
+                while(mmPali.charAt(mmPali.indexOf(curChar)) != smapStr.charAt(mmPali.indexOf(curChar))){
+                    rsapi.exch(arrI, ip2, ip1);
+                    swapsOutput[swapC] = "(" + ip1 + "," + ip2 + ")"; 
+                    swapC++;
+                    System.out.println(ip1 + " " + ip2);
+                    mapStr = ssapi.printStr(arrI, nsLn);
+                    smapStr = ssapi.printStr(arrI, lne);
+                    
+                    if(smapStr.equals(pali)){
+                        swapsOutput[swapsOutput.length - 1] = swapC + "";
+                            return swapsOutput;
+                    }
+                if(mmPali.charAt(mmPali.indexOf(curChar)) == smapStr.charAt(mmPali.indexOf(curChar))){
+                    break;
+                }
+                    ip2 = rsapi.getP2(mmPali, curChar, j, i, dosJmx);
+                    ip1 = mapStr.indexOf(curChar);
+                }
+                   for(int i3 = i; i3 < N; i3 ++) {
+                        if(smapStr.charAt(i3) == mmPali.charAt(i3)) {
+                            nsbLn.setCharAt(i3, '-');
+                            nsLn = nsbLn + "";
+                            nsbPali.setCharAt(i3, '^');
+                            mmPali = nsbPali + "";
+                        }
+                    }
+              if(ip2 != -1){
+                
+              }
             }
         }
         return swapsOutput;

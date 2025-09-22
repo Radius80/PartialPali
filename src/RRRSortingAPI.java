@@ -71,6 +71,20 @@ public class RRRSortingAPI {
     return p2;
     }
 
+    public int getP2P58(String lne, char pop, int j, int i, int mx) {
+    int p2 = lne.lastIndexOf(pop);
+    RRRMathAPI mapi = new RRRMathAPI();
+        if(Math.abs(p2 - i) > mx) {
+            p2 = mapi.MaxClamp(j, mx);
+        }
+        while(p2 == 0 && (lne.charAt(0) == '^' || lne.charAt(0) == '-')) {
+            j++;
+            p2 = mapi.MinClamp(lne.lastIndexOf(pop, j), 0);
+        }
+    return p2;
+    }
+
+
     public static void doSwaps(String str, Comparable[] pPQ) {
         int pos1, pos2, inx1, inx2, inx3;
         while (!str.equals("}")) {
