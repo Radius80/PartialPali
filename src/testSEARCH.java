@@ -530,6 +530,7 @@ public class testSEARCH {
                     mapStr = ssapi.printStr(arrI, nsLn);
                     while(mapStr.charAt(i) != mmPali.charAt(i)) {
                         ip2 = rsapi.getP2(mapStr, pop2, j, i, dosJmx);
+
                         ip1 = mmPali.indexOf(pop2);
                         if(Math.abs(ip2 - ip1) > dosJmx) {
                             ip1 = ip2 - dosJmx;
@@ -608,15 +609,20 @@ public class testSEARCH {
         nsLn = ssapi.SameSame(nsLn, mmPali);
         mmPali = ssapi.SameSameCap(mmPali, lne);
         nsbLn = new StringBuilder(nsLn);
-        nsbPali = new StringBuilder(pali);
+        nsbPali = new StringBuilder(mmPali);
+
+        
         for (int i = 0; i < N; i++) {
             if(nsLn.charAt(i) != '-' ) {
             mapStr = ssapi.printStr(arrI, nsLn);
             smapStr = ssapi.printStr(arrI, lne);
-            curChar = mapStr.charAt(i);
-              j = i + dosJmx;
-              ip2 = rsapi.getP2P58(mmPali, curChar, j, i, dosJmx);
-              ip1 = mapStr.indexOf(curChar);
+            curChar = smapStr.charAt(i);
+            if(curChar == 'C'){
+                System.out.println("Pause");
+            }
+                j = i + dosJmx;
+                ip2 = rsapi.getP2P58(mmPali, curChar, j, i, dosJmx);
+                ip1 = nsLn.indexOf(curChar);
                 if(Math.abs(ip2 - ip1) > dosJmx) {
                     ip1 = ip2 - dosJmx;
                 }  
@@ -640,22 +646,29 @@ public class testSEARCH {
                 if(mmPali.charAt(mmPali.indexOf(curChar)) == smapStr.charAt(mmPali.indexOf(curChar))){
                     break;
                 }
+                
                     return cMakeMpP57(lne, pali, sComAr, dosJmx);
                     //ip2 = rsapi.getP2(mmPali, curChar, j, i, dosJmx);
                     //ip1 = mapStr.indexOf(curChar);
                 }
+                    nsLn = smapStr;
+                    nsbLn = new StringBuilder(nsLn);
                    for(int i3 = i; i3 < N; i3 ++) {
-                        if(smapStr.charAt(i3) == mmPali.charAt(i3)) {
+                        if(smapStr.charAt(i3) == pali.charAt(i3)) {
                             nsbLn.setCharAt(i3, '-');
                             nsLn = nsbLn + "";
                             nsbPali.setCharAt(i3, '^');
                             mmPali = nsbPali + "";
                         }
                     }
-              if(ip2 != -1){
-                
-              }
-            }
+                    System.out.println("pause");
+                } else {
+                    if(i > 0) {
+                        if(nsLn.charAt(i-1) != '-'){
+                            i = i -2;
+                        }
+                    }
+                }
         }
         return swapsOutput;
     }

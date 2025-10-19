@@ -61,7 +61,7 @@ public class RRRSortingAPI {
     public int getP2(String lne, char pop, int j, int i, int mx) {
     int p2 = lne.lastIndexOf(pop);
     RRRMathAPI mapi = new RRRMathAPI();
-        if(Math.abs(p2 - i) > mx) {
+        if(Math.abs(p2 - i) > mx && lne.lastIndexOf(pop, j) != -1) {
             p2 = mapi.MinClamp(lne.lastIndexOf(pop, j), 0); 
         }
         while(p2 == 0 && (lne.charAt(0) == '^' || lne.charAt(0) == '-')) {

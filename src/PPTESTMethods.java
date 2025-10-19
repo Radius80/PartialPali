@@ -44,30 +44,10 @@ public class PPTESTMethods {
         //String line = "CGCATAT"; rightOutput = "(0,4) (1,3) 2 "; String pali = "TACGCAT"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
         //String line = "CGTTCGC"; rightOutput = "(3,4) 1 "; String pali = "CGTCTGC"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
         //String line = "GCATATG"; rightOutput = "(1,3) 1 "; String pali = "GTACATG"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-        String line = "GTTCGCA"; rightOutput = "(0,2) (0,5) (3,6) 3 "; String pali = "CTGAGTC"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-        //String line = "TCGCATA"; rightOutput = "(0,1) (0,4) (2,3) 3 "; String pali = "CTGAGTC"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
+        //String line = "GTTCGCA"; rightOutput = "(0,2) (0,5) (3,6) 3 "; String pali = "CTGAGTC"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
+        String line = "TCGCATA"; rightOutput = "(0,1) (0,4) (2,3) 3 "; String pali = "ATCGCTA"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
 
-
-        //MakePali
         
-        //String line = "GTTCGC"; String swpline = "{GTTCGC=[(0,1), (0,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-        //String line = "CATATGC"; String swpline = "{CATATGC=[(3,5)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length());  tss.testSH5();
-        //String line = "CCCGTTC"; String swpline = "{CCCGTTC=[(1,4)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length());  tss.testSH5();
-        //String line = "CGCATAT"; String swpline = "{CGCATAT=[(0,4), (1,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length());  tss.testSH5();
-        //String line = "CGTTCGC"; String swpline = "{CGTTCGC=[(3,4)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length());  tss.testSH5();
-        //String line = "GCATATG"; String swpline = "{GCATATG=[(1,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length());  tss.testSH5();
-        //String line = "GTTCGCA"; String swpline = "{GTTCGCA=[(0,2), (0,5), (3,6)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length());  tss.testSH5();
-        
-        //String line = "TCGCATA"; 
-        //String swpline = "{TCGCATA=[(0,1), (0,4), (2,3)]}"; 
-        //int dosJmx = line.length(); 
-        //arrIdx = new Comparable[line.length()]; 
-        //arrIdx = rsapi.flCompa(arrIdx, line.length()); 
-        //tss.testSH5();
-        
-        //String line = "AAGCC"; String swpline = "{AAGCC=[(1,2), (2,3), (1,2), (0,1)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.tsP105cash();
-        //String line = "AGTGT"; String swpline = "{AGTGT=[(0,1), (1,2), (0,1)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.tsP105cash();
-
         //Comparable [] arrIdx2 = new Comparable[line.length()]; 
         //arrIdx2 = rsapi.flCompa(arrIdx, line.length()); 
         //rsapi.doSwaps(swpline, arrIdx2);
@@ -80,6 +60,7 @@ public class PPTESTMethods {
         
         String[] swaps = new String[line.length()]; 
         swaps = tss.cMakeMpP58(line, pali, arrIdx, dosJmx);
+
         System.out.println(ssapi.lstTARRAYString(swaps) + "|" + rightOutput );
         System.out.println(ssapi.lstTARRAYString(swaps).equals(rightOutput) );
 
@@ -160,52 +141,8 @@ public class PPTESTMethods {
             }
         }
     }
-
-//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111
-    /**
-     * There are different make palindrome methods depending on the parameters
-     * entered by the user. This function chooses the right one
-     * @param ln The sub string and or Quazi Palindrome
-     * @param jmn The jump minimum
-     * @param jmx The jump maximum
-     * @return The palindrome
-     */
-    public String choosePali(String ln, int jmx) {
-        testSEARCH tss = new testSEARCH();
-        if(p2nSwapsMax == 21) {
-            return tss.mkPaliP56(ln,jmx);
-        } else {
-            return tss.mkPaliP56(ln,jmx);
-        }
-    }
-
     
 //111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111    
-    /**
-     * Chooses the correct VPSwp to do
-     * So a range of jump intervals should be tried to get the entered number of swaps
-     * So if there should be one swap as an example the number of swaps is obtained
-     * from the last entry in the Sw array 
-     * and it redoes the method until the correct number of swaps is achieved.
-     * @implNote the parameters are too long but this will happen in the PPSearch class
-     * which has these parameters as instance variables.
-     * @param Sw Array containing multiple swappes
-     * @param Sq Sequantial Comparable array
-     * @param mP Mapped Comparable array
-     * @param jMx jump Maximum
-     * @param sMx Swap Maximum
-     * @param me Refference to self to be able to edit multiple variables in one method.
-     */
-
-    public void chVPSwp(String[] Sw, Comparable[] Sq, Comparable[] mP, int dosMax) {    
-        //int nmrSwaps = 0;
-        //RRRSortingAPI rsapi = new RRRSortingAPI();
-        if(p1nSwapsMin > 1 && p5jmpMin > 1) {
-            vPSwp(Sw, Sq, mP, dosMax);
-        } else {
-            vPSwp(Sw, Sq, mP, dosMax);
-        }
-    }
 
 
 //111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111//111111111
