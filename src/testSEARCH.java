@@ -58,7 +58,9 @@ public class testSEARCH {
         p6jmpMax = 6;
     }
     public void testSH4(){
-        p5jmpMin = 1;
+        p1nSwapsMin = 1; 
+        p2nSwapsMax = 91; 
+        p5jmpMin = 1; 
         p6jmpMax = 1;
     }
     public void testSpecial(){
@@ -68,6 +70,7 @@ public class testSEARCH {
     public void testSH5(){
         p5jmpMin = 1;
         p6jmpMax = 6;
+        p2nSwapsMax = 21; 
     }
     
     public void tsP105cash() {
@@ -468,6 +471,193 @@ public class testSEARCH {
         revS = makeSecondHalfP57(suiQP, holdFrst, holdSecH, jumpMax);
         revf = ssapi.sReverse(revS);
         return revf + tail + revS;
+    }
+
+    /**
+     * Better algorythm to make the map sequence 
+     * SwapC is Swap count variable
+     * nsLine for (not same line) is a String of the quazipalindrome 
+     * where all the digits in the quazipalindrome that are the same
+     * as the palindrome are replaced with dashes 
+     * ex  let's say the string is  "TACGTACGGCAGCA" the palindrome is 
+     *                              "ACGACGTTGCAGCA" 
+     * nsLine is TACGTACG------
+     * nsbLine is the string builder of nsLine. 
+     * smapStr is for stopmap string. It will be checked to see if the
+     * algorhythm should terminate.
+     * End string(EndStr) is then a temperarry equivalent of nsLine
+     * All the dashes is then removed.
+     * idxx is then the first index(rank) of the character in the quazipalindrome
+     * That rank is then stored in what should be the bijection map
+     * of where the digit went from the QP to the Pali
+     * 
+     * nsLine.substring(6,7) = "G" we want two
+     * ->p6jmpMax + i + 1
+     * @param lne String entered for the palindrome program
+     * @param pali Palindrome made from the quazipalindrome
+     * @param sComAr numbered Comparable array
+     * @return Mapped comparable array (null if there are to manny swaps) 
+     */
+    public String[] cMakeMpP57(String lne, String pali, Comparable[] sComAr, int dosJmx) {
+        RRRArrayFunctions raf = new RRRArrayFunctions();
+        RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
+        RRRSortingAPI rsapi = new RRRSortingAPI();
+        String mmPali = pali, nsLn = lne, mapStr, smapStr;
+        StringBuilder nsbLn, nsbPali;
+        String[] swapsOutput = new String[lne.length()];
+        Comparable[] arrI = new Comparable[sComAr.length];
+        int ip2, ip1, swapC = 0, N = lne.length(), j;
+        char pop2;
+
+        raf.CopyEmutCom(sComAr, arrI);
+        nsLn = ssapi.SameSame(nsLn, mmPali);
+        
+        nsbLn = new StringBuilder(nsLn);
+        nsbPali = new StringBuilder(pali);
+        for (int i = 0; i < N; i++) {
+            if( i == 3) {
+                i = 3;
+            }
+            if(nsLn.charAt(i) != '-') {
+                pop2 = mmPali.charAt(i);
+                j = i + dosJmx;
+                if(i == 4) {
+                    i = 4;
+                }
+                mapStr = ssapi.printStr(arrI, nsLn);
+                ip2 = rsapi.getP2(mapStr, pop2, j, i, dosJmx);
+                if(ip2 != -1 ){
+                    mapStr = ssapi.printStr(arrI, nsLn);
+                    while(mapStr.charAt(i) != mmPali.charAt(i)) {
+                        ip2 = rsapi.getP2(mapStr, pop2, j, i, dosJmx);
+                        ip1 = mmPali.indexOf(pop2);
+                        if(Math.abs(ip2 - ip1) > dosJmx) {
+                            ip1 = ip2 - dosJmx;
+                        }
+                        if(mapStr.charAt(ip1) == '-'){
+                            ip1 = i;
+                        }
+                        rsapi.exch(arrI, ip2, ip1);
+                        
+                        swapsOutput[swapC] = "(" + ip1 + "," + ip2 + ")"; 
+                        mapStr = ssapi.printStr(arrI, nsLn);
+                        smapStr = ssapi.printStr(arrI, lne);
+                        
+                        if(smapStr.equals(pali)) {
+                            swapsOutput[swapsOutput.length - 1] = swapC + "";
+                            return swapsOutput;
+                        }
+                        swapC = swapC + 1;
+                        if(swapC > Math.min(p2nSwapsMax, N)) {
+                            return null;
+                        }
+                    }
+        //if(mapStr.charAt(i) == mmPali.charAt(i)) will be true
+                    for(int i3 = i; i3 < N; i3 ++) {
+                        if(mapStr.charAt(i3) == mmPali.charAt(i3)) {
+                            nsbLn.setCharAt(i3, '^');
+                            nsLn = nsbLn + "";
+                            nsbPali.setCharAt(i3, '!');
+                            mmPali = nsbPali + "";
+                        }
+                    }
+                } 
+            }
+        }
+        return swapsOutput;
+    }
+
+
+        /**
+     * Better algorythm to make the map sequence 
+     * SwapC is Swap count variable
+     * nsLine for (not same line) is a String of the quazipalindrome 
+     * where all the digits in the quazipalindrome that are the same
+     * as the palindrome are replaced with dashes 
+     * ex  let's say the string is  "TACGTACGGCAGCA" the palindrome is 
+     *                              "ACGACGTTGCAGCA" 
+     * nsLine is TACGTACG------
+     * nsbLine is the string builder of nsLine. 
+     * smapStr is for stopmap string. It will be checked to see if the
+     * algorhythm should terminate.
+     * End string(EndStr) is then a temperarry equivalent of nsLine
+     * All the dashes is then removed.
+     * idxx is then the first index(rank) of the character in the quazipalindrome
+     * That rank is then stored in what should be the bijection map
+     * of where the digit went from the QP to the Pali
+     * 
+     * nsLine.substring(6,7) = "G" we want two
+     * ->p6jmpMax + i + 1
+     * @param lne String entered for the palindrome program
+     * @param pali Palindrome made from the quazipalindrome
+     * @param sComAr numbered Comparable array
+     * @return Mapped comparable array (null if there are to manny swaps) 
+     */
+    public String[] cMakeMpP58(String lne, String pali, Comparable[] sComAr, int dosJmx) {
+        RRRArrayFunctions raf = new RRRArrayFunctions();
+        RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
+        RRRSortingAPI rsapi = new RRRSortingAPI();
+        String nsLn = lne, mmPali = pali, mapStr, smapStr = "]]]]]]]]]";
+        StringBuilder nsbLn, nsbPali;
+        String[] swapsOutput = new String[lne.length()];
+        Comparable[] arrI = new Comparable[sComAr.length];
+        int ip2, ip1, swapC = 0, N = lne.length(), j;
+        char curChar;
+
+        raf.CopyEmutCom(sComAr, arrI);
+        nsLn = ssapi.SameSame(nsLn, mmPali);
+        mmPali = ssapi.SameSameCap(mmPali, lne);
+        nsbLn = new StringBuilder(nsLn);
+        nsbPali = new StringBuilder(pali);
+        for (int i = 0; i < N; i++) {
+            if(nsLn.charAt(i) != '-' ) {
+            mapStr = ssapi.printStr(arrI, nsLn);
+            smapStr = ssapi.printStr(arrI, lne);
+            curChar = mapStr.charAt(i);
+              j = i + dosJmx;
+              ip2 = rsapi.getP2P58(mmPali, curChar, j, i, dosJmx);
+              ip1 = mapStr.indexOf(curChar);
+                if(Math.abs(ip2 - ip1) > dosJmx) {
+                    ip1 = ip2 - dosJmx;
+                }  
+                if(ip2 < ip1) {
+                    int holdp12 = ip1;
+                    ip1 = ip2;
+                    ip2 = holdp12;
+                }
+                while(true){
+                    rsapi.exch(arrI, ip2, ip1);
+                    swapsOutput[swapC] = "(" + ip1 + "," + ip2 + ")"; 
+                    swapC++;
+                    System.out.println(ip1 + " " + ip2);
+                    mapStr = ssapi.printStr(arrI, nsLn);
+                    smapStr = ssapi.printStr(arrI, lne);
+                    
+                    if(smapStr.equals(pali)){
+                        swapsOutput[swapsOutput.length - 1] = swapC + "";
+                            return swapsOutput;
+                    }
+                if(mmPali.charAt(mmPali.indexOf(curChar)) == smapStr.charAt(mmPali.indexOf(curChar))){
+                    break;
+                }
+                    return cMakeMpP57(lne, pali, sComAr, dosJmx);
+                    //ip2 = rsapi.getP2(mmPali, curChar, j, i, dosJmx);
+                    //ip1 = mapStr.indexOf(curChar);
+                }
+                   for(int i3 = i; i3 < N; i3 ++) {
+                        if(smapStr.charAt(i3) == mmPali.charAt(i3)) {
+                            nsbLn.setCharAt(i3, '-');
+                            nsLn = nsbLn + "";
+                            nsbPali.setCharAt(i3, '^');
+                            mmPali = nsbPali + "";
+                        }
+                    }
+              if(ip2 != -1){
+                
+              }
+            }
+        }
+        return swapsOutput;
     }
 
 

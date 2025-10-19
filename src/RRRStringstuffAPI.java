@@ -82,7 +82,9 @@ public class RRRStringstuffAPI {
     public String lstTARRAYString(String[] arr) {
         String contents = "";
         for (int i = 0; i < arr.length; i++) {
+            if(arr[i] != null){
             contents += arr[i] + " ";
+            }
         }
         return contents;
     }
