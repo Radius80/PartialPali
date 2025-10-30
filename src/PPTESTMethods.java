@@ -43,8 +43,8 @@ public class PPTESTMethods {
         //String line = "CGCATAT"; rightOutput = "(0,4) (1,3) 2 "; String pali = "TACGCAT"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
         //String line = "CGTTCGC"; rightOutput = "(3,4) 1 "; String pali = "CGTCTGC"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
         //String line = "GCATATG"; rightOutput = "(1,3) 1 "; String pali = "GTACATG"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-        String line = "GTTCGCA"; rightOutput = "(0,2) (0,5) (3,6) 3 "; String pali = "CTGAGTC"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-        //String line = "TCGCATA"; rightOutput = "(0,1) (0,4) (2,3) 3 "; String pali = "ATCGCTA"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
+        //String line = "GTTCGCA"; rightOutput = "(0,2) (0,5) (3,6) 3 "; String pali = "CTGAGTC"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
+        String line = "TCGCATA"; rightOutput = "(0,1) (0,4) (2,3) 3 "; String pali = "ATCGCTA"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
 
         //Comparable [] arrIdx2 = new Comparable[line.length()]; 
         //arrIdx2 = rsapi.flCompa(arrIdx, line.length()); 
@@ -57,7 +57,7 @@ public class PPTESTMethods {
         //}
         
         String[] swaps = new String[line.length()]; 
-        swaps = tss.cMakeMpP58(line, pali, arrIdx, dosJmx);
+        swaps = tss.cMakeMpP59(line, pali, arrIdx, dosJmx);
 
         System.out.println(ssapi.lstTARRAYString(swaps) + "|" + rightOutput );
         System.out.println(ssapi.lstTARRAYString(swaps).equals(rightOutput) );

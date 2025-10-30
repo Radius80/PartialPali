@@ -674,6 +674,78 @@ public class testSEARCH {
         return swapsOutput;
     }
 
+    public String[] cMakeMpP59(String lne, String pali, Comparable[] sComAr, int dosJmx) {
+        RRRArrayFunctions raf = new RRRArrayFunctions();
+        RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
+        RRRSortingAPI rsapi = new RRRSortingAPI();
+        String nsLn = lne, mmPali = pali, smapStr = "]]]]]]]]]",subhelp;
+        StringBuilder nsbLn, nsbPali;
+        String[] swapsOutput = new String[lne.length()];
+        Comparable[] arrI = new Comparable[sComAr.length];
+        int ip2, ip1, swapC = 0, N = lne.length(), j;
+        char curChar, ch1, ch2;
+        raf.CopyEmutCom(sComAr, arrI);
+        nsLn = ssapi.SameSame(nsLn, mmPali);
+        mmPali = ssapi.SameSameCap(mmPali, lne);
+        nsbLn = new StringBuilder(nsLn);
+        nsbPali = new StringBuilder(mmPali);
+        for (int i = 0; i < N; i++) {
+            if(nsLn.charAt(i) != '-' ) {
+                smapStr = ssapi.printStr(arrI, lne);
+                curChar = smapStr.charAt(i);
+                j = i + dosJmx;
+                ip2 = rsapi.getP2bj(mmPali, curChar, j, i, dosJmx);
+                ip1 = nsLn.indexOf(curChar);
+                if(Math.abs(ip2 - ip1) > dosJmx) {
+                    ip1 = ip2 - dosJmx;
+                }  
+                if(ip2 < ip1) {
+                    int holdp12 = ip1;
+                    ip1 = ip2;
+                    ip2 = holdp12;
+                }
+                while(true){
+                    rsapi.exch(arrI, ip2, ip1);
+                    swapsOutput[swapC] = "(" + ip1 + "," + ip2 + ")"; 
+                    swapC++;
+                    smapStr = ssapi.printStr(arrI, lne);                    
+                    if(smapStr.equals(pali)){
+                        swapsOutput[swapsOutput.length - 1] = swapC + "";
+                            return swapsOutput;
+                    }
+                    ch1 = mmPali.charAt(mmPali.indexOf(curChar));
+                    ch2 = smapStr.charAt(mmPali.indexOf(curChar));
+                    if(ch1 == ch2 ){
+                        break;
+                    }             
+                    if(smapStr.charAt(i) == mmPali.charAt(i)){
+                        break;
+                    }   
+                    return smlJumpL(lne, pali, sComAr, dosJmx);
+                }
+                    nsLn = smapStr;
+                    nsbLn = new StringBuilder(nsLn);
+                   for(int i3 = i; i3 < N; i3 ++) {
+                        if(smapStr.charAt(i3) == pali.charAt(i3)) {
+                            nsbLn.setCharAt(i3, '-');
+                            nsLn = nsbLn + "";
+                            nsbPali.setCharAt(i3, '^');
+                            mmPali = nsbPali + "";
+                        }
+                    }
+                } else {
+                    if(i > 0) {
+                        if(nsLn.charAt(i-1) != '-'){
+                            i = i -2;
+                        }
+                    }
+
+                }
+        }
+        return swapsOutput;
+    }
+
+
      /**
      * Does the sorting of the string that was entered. It does not do sorting
      * anymore it just groups all the pares together.
