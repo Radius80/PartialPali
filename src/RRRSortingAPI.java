@@ -46,19 +46,55 @@ public class RRRSortingAPI {
         return v.compareTo(w) == 0;        
     }
 
+    /**
+     * This public method exchanges the value of two indecies
+     * specified in the parameters
+     * @param a Comparable array
+     * @param i First swap index
+     * @param j second swap index
+     */
     public void exch(Comparable[] a, int i, int j) {
         Comparable t = a[i];
         a[i] = a[j];
         a[j] = t;
     }
 
+    /**
+     * This public method exchanges the value of two indecies
+     * specified in the parameters
+     * Static version
+     * @param a Comparable array
+     * @param i First swap index
+     * @param j second swap index
+     */
     public static void stExch(Comparable[] a, int i, int j) {
         Comparable t = a[i];
         a[i] = a[j];
         a[j] = t;
     }
 
-    public int getP2(String lne, char pop, int j, int i, int mx) {
+    /**
+     * Get position two in the sequence (sj => small jump)
+     * 
+     * If position is more than the specified jump length and 
+     * the last index of from j exist 
+     * p2 is the last index of pop from j not just the last index
+     * 
+     * The reason for this is to insure that it doesn't pick a 
+     * position that is more than the jump length from the current index
+     * 
+     * If first character is either '^' or '-'
+     * it should find it from a smaller substring
+     * The reason for this is simple the search should not include the '-'
+     * or '^'
+     * @param lne The string line to search
+     * @param pop The character to search
+     * @param j i + jump interval
+     * @param i the index itteration
+     * @param mx jump interval
+     * @return The second posion to print
+     */
+    public int getP2sj(String lne, char pop, int j, int i, int mx) {
     int p2 = lne.lastIndexOf(pop);
     RRRMathAPI mapi = new RRRMathAPI();
         if(Math.abs(p2 - i) > mx && lne.lastIndexOf(pop, j) != -1) {
@@ -71,7 +107,28 @@ public class RRRSortingAPI {
     return p2;
     }
 
-    public int getP2P58(String lne, char pop, int j, int i, int mx) {
+    /**
+     * Get position two in the sequence (bj => big jump)
+     *
+     * So with this function it finds the maximum between 
+     * the maxsimum jump length. It's becuase the algorythm 
+     * that uses this method does the inverse of the sj method 
+     * 
+     * The reason for this is to insure that it doesn't pick a 
+     * position that is more than the jump length from the current index
+     * 
+     * If first character is either '^' or '-'
+     * it should find it from a smaller substring
+     * The reason for this is simple the search should not include the '-'
+     * or '^'
+     * @param lne The string line to search
+     * @param pop The character to search
+     * @param j i + jump interval
+     * @param i the index itteration
+     * @param mx jump interval
+     * @return The second posion to print
+     */
+    public int getP2bj(String lne, char pop, int j, int i, int mx) {
     int p2 = lne.lastIndexOf(pop);
     RRRMathAPI mapi = new RRRMathAPI();
         if(Math.abs(p2 - i) > mx) {
@@ -84,7 +141,12 @@ public class RRRSortingAPI {
     return p2;
     }
 
-
+/**
+ * This method uses a string and performs swap opetations to a
+ * priority que
+ * @param str String of Origeonal Sequence
+ * @param pPQ Comparable array to store Mapped sequence
+ */
     public static void doSwaps(String str, Comparable[] pPQ) {
         int pos1, pos2, inx1, inx2, inx3;
         while (!str.equals("}")) {
@@ -100,7 +162,6 @@ public class RRRSortingAPI {
     }
 
     /**
-     * 
      * This is a function that fills a array with the index squared integers. It
      * comes from an exercise It comes from Algo exer 1.1.10
      *
@@ -157,7 +218,18 @@ public class RRRSortingAPI {
         } 
         return "x";
     }
-
+    
+    /**
+     * Starts with method. This method takes a string and checks if it 
+     * Starts with a different character sequence
+     * 
+     * If the string starts with the sequence specified then the 
+     * reverse of the string should be retured and vice versa
+     *  
+     * @param ch1 Character sequence equivalent
+     * @param h1 String
+     * @return reverse of String or the String 
+     */
     public String stWith(String ch1, String h1) {
         String check1 = ch1;
         RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
@@ -171,29 +243,6 @@ public class RRRSortingAPI {
         }
         return "x";
     }    
-
-    public char cFinddif(String h2nd, String h1st) {
-        char rep, cd = '!';
-        String t2nd = h2nd, t1st = h1st;
-        int  h1stAmount, h2ndAmount, iChar = 0, N = h1st.length();
-        while (cd == '!' ) {
-                rep = t2nd.charAt(cClamp(iChar));
-                t2nd = t2nd.replace(rep + "", "");
-                h2ndAmount = Math.abs(h2nd.length() - t2nd.length());
-                t1st = t1st.replace(rep + "", "");
-                h1stAmount = Math.abs(h1st.length() - t1st.length());
-                if (h2ndAmount > h1stAmount) {
-                    cd = rep;
-                    break;
-                } else if(iChar >= N - 1 ){
-                    break;
-                }
-                t1st = h1st;
-                t2nd = h2nd;
-                iChar++;
-            }
-        return cd;
-    }
 
     /**
      * This method takes the hold second as lne and if the corresponding
@@ -218,7 +267,9 @@ public class RRRSortingAPI {
     }
 
     /**
-     * This method takes in 2 strings and returns the first index where they are the same  
+     * Count the amount that's the same.
+     * This method takes in 2 strings and returns the first index where they 
+     * are the same.  
      * @param h1 first string to compare
      * @param hf second string to compare
      * @return the number of characters that are the same

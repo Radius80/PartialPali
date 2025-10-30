@@ -116,7 +116,28 @@ public class testSEARCH {
         return idx;
     }
 
-
+    /**
+     * This method finds a character in a second string
+     * That does not appear in the first
+     * 
+     * So the cd is a character variable that is by default
+     * '!' 
+     * so the first while condition passes.
+     * iChar is a character that counts the index character 
+     * of the string.
+     * rep is the character of the index of iChar and the second
+     * string is then cleared of all characters that are the same as rep
+     * After the reps are replaced h2ndAmount is the difference of h2nd 
+     * before the replacement and after the replacement.
+     * The same happends to h1stAmount.
+     * If the resulting stringlength of h2nd is more than h1st
+     * the method should return the character that resulted in this
+     * situation as this is the character in the second string that
+     * is in the second but not in the first. 
+     * @param h2nd The second string to find a character 
+     * @param h1st The first string 
+     * @return Character that is in the second string but not in the first
+     */
     public char cFinddif(String h2nd, String h1st) {
         RRRMathAPI mapi = new RRRMathAPI();
         char rep, cd = '!';
@@ -147,7 +168,7 @@ public class testSEARCH {
      * @return true if the string is a palindrome and false otherwise
      */
     public static boolean isPali(String pali) {
-        int j = 0;
+        int j;
         for (int i = 0; i < pali.length()/2; i++) {
             j = (pali.length()) - 1 - i;
             if(pali.charAt(i) != pali.charAt(j)) {
@@ -179,6 +200,17 @@ public class testSEARCH {
         return "x";
     }
 
+    /**
+     * Starts with method. This method takes a string and checks if it 
+     * Starts with a different character sequence
+     * 
+     * If the string starts with the sequence specified then the 
+     * reverse of the string should be retured and vice versa
+     *  
+     * @param ch1 Character sequence equivalent
+     * @param h1 String
+     * @return reverse of String or the String 
+     */
     public String stWith(String ch1, String h1) {
         String check1 = ch1;
         RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
@@ -197,8 +229,9 @@ public class testSEARCH {
     /**
      * This method takes the hold second as lne and if the corresponding
      * digit in hold1st is correct it edits the string so that the program 
-     * leaves it alone
-     * 
+     * leaves it alone.
+     * This version of the method returns the altered string with 'n' 
+     * replacements.
      * @param lne This is the string where the substitution will happen
      * @param pali This is the string value that is used to check for duplicates
      * @return Alternate version of lne with dashes where it coinsides with pali
@@ -233,18 +266,28 @@ public class testSEARCH {
     }
 
     /**
-     * dontC don't swap character
-     * dontCsk don't swap skip
-     * @param holdFrst
-     * @param holdSecH
-     * @param jumpMax
-     * @param c1
-     * @param c2
-     * @return
+     * This method checks if the algorhythm should search and should terminate after one swap.
+     * 
+     * The SameSamen method swaps all the character of hold1st and hold2nd that are the same
+     * of hold2nd with 'n'.
+     * popf and pop is used to swap the characters at the current index called j.
+     * The method should terminate if both the second half and first half equals 
+     * a palindrome.
+     * pc1 and pc2 are then two characters that don't apear in the respected halfs of
+     * the potential quazipalindrome.
+     * If no character is found that differs in the first hald and second half 
+     * a version of one of the halves should be returned.
+     * 
+     * @param holdFrst The first half of a potential quazipalindrome string
+     * @param holdSecH The second half of a potential quazipalindrome string
+     * @param jumpMax Maximum jump length
+     * @param c1 The current character that the second string contains but the first one doesn't
+     * @param c2 The current character that the first string contains but the second one doesn't
+     * @return half of the constructed palindrome
      */
     public String oneSwapleft (String holdFrst, String holdSecH, int jumpMax, char c1, char c2) {
         RRRMathAPI mapi = new RRRMathAPI();
-        String hold1st = holdFrst, nshold2nd = holdSecH, hold2nd = holdSecH ;
+        String hold1st = holdFrst, nshold2nd, hold2nd = holdSecH ;
         StringBuilder pop = new StringBuilder(hold2nd), popf;
         RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
         char pc1, pc2;
@@ -351,12 +394,12 @@ public class testSEARCH {
      * @param jumMax JumpMax
      * @return Second half;
      */
-    public String makeSecondHalfP57(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {        
+    public String makeSecondHalf(String srapiQP, String holdFrst, String holdSecH, int jumpMax) {        
         RRRMathAPI mapi = new RRRMathAPI();
         String hold1st, hold2nd, swap1l, chStr2nd, chStr1st;
         StringBuilder pop, popf;
         RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
-        char c1 = '!', c2 = '!';
+        char c1, c2;
         int cIdx1st, cIdx2nd;
         jumpMax = mapi.MinClamp(jumpMax, 1);
         //Why this ^ 
@@ -401,27 +444,23 @@ public class testSEARCH {
             if(cIdx1st != 0) {
             cIdx1st = hold1st.lastIndexOf(c1);
             }
-            
             pop = new StringBuilder(hold2nd);            
             pop.setCharAt(cIdx2nd, c1);
             hold2nd = pop + "";
-
             popf = new StringBuilder(hold1st);
             popf.setCharAt(cIdx1st, c2);
             hold1st = popf + "";
         } else {
-            //jmpMx == 1
             cIdx2nd = hold2nd.indexOf(c2);
             pop = new StringBuilder(hold2nd);
             pop.setCharAt(cIdx2nd, c1);
             hold2nd = pop + "";
-
             cIdx1st = hold1st.indexOf(c1);
             popf = new StringBuilder(hold1st);
             popf.setCharAt(cIdx1st, c2);
             hold1st = popf + "";
         }
-        return makeSecondHalfP57(srapiQP, hold1st, hold2nd, jumpMax);
+        return makeSecondHalf(srapiQP, hold1st, hold2nd, jumpMax);
     }
 
 
@@ -438,7 +477,7 @@ public class testSEARCH {
      * @param jMax Jump Maximum length
      * @return Palindrome
      */
-    public String mkPaliP56(String suiQP, int jMax) {
+    public String mkPali(String suiQP, int jMax) {
         int jumpMax = (jMax/2);
         String tail = "";
         String hold3 = suiQP;
@@ -468,37 +507,22 @@ public class testSEARCH {
              revS = ssapi.sReverse(holdSecH);
             return revf + tail + revS;
         }    
-        revS = makeSecondHalfP57(suiQP, holdFrst, holdSecH, jumpMax);
+        revS = makeSecondHalf(suiQP, holdFrst, holdSecH, jumpMax);
         revf = ssapi.sReverse(revS);
         return revf + tail + revS;
     }
 
     /**
-     * Better algorythm to make the map sequence 
-     * SwapC is Swap count variable
-     * nsLine for (not same line) is a String of the quazipalindrome 
-     * where all the digits in the quazipalindrome that are the same
-     * as the palindrome are replaced with dashes 
-     * ex  let's say the string is  "TACGTACGGCAGCA" the palindrome is 
-     *                              "ACGACGTTGCAGCA" 
-     * nsLine is TACGTACG------
-     * nsbLine is the string builder of nsLine. 
-     * smapStr is for stopmap string. It will be checked to see if the
-     * algorhythm should terminate.
-     * End string(EndStr) is then a temperarry equivalent of nsLine
-     * All the dashes is then removed.
-     * idxx is then the first index(rank) of the character in the quazipalindrome
-     * That rank is then stored in what should be the bijection map
-     * of where the digit went from the QP to the Pali
+     * smlJumpL small jump length makeMap
      * 
-     * nsLine.substring(6,7) = "G" we want two
-     * ->p6jmpMax + i + 1
+     * This method will activate if the if the jumplength is small or if there
+     * is problems with the jump length. 
      * @param lne String entered for the palindrome program
      * @param pali Palindrome made from the quazipalindrome
      * @param sComAr numbered Comparable array
      * @return Mapped comparable array (null if there are to manny swaps) 
      */
-    public String[] cMakeMpP57(String lne, String pali, Comparable[] sComAr, int dosJmx) {
+    public String[] smlJumpL(String lne, String pali, Comparable[] sComAr, int dosJmx) {
         RRRArrayFunctions raf = new RRRArrayFunctions();
         RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
         RRRSortingAPI rsapi = new RRRSortingAPI();
@@ -508,29 +532,20 @@ public class testSEARCH {
         Comparable[] arrI = new Comparable[sComAr.length];
         int ip2, ip1, swapC = 0, N = lne.length(), j;
         char pop2;
-
         raf.CopyEmutCom(sComAr, arrI);
         nsLn = ssapi.SameSame(nsLn, mmPali);
-        
         nsbLn = new StringBuilder(nsLn);
         nsbPali = new StringBuilder(pali);
         for (int i = 0; i < N; i++) {
-            if( i == 3) {
-                i = 3;
-            }
             if(nsLn.charAt(i) != '-') {
                 pop2 = mmPali.charAt(i);
                 j = i + dosJmx;
-                if(i == 4) {
-                    i = 4;
-                }
                 mapStr = ssapi.printStr(arrI, nsLn);
-                ip2 = rsapi.getP2(mapStr, pop2, j, i, dosJmx);
+                ip2 = rsapi.getP2sj(mapStr, pop2, j, i, dosJmx);
                 if(ip2 != -1 ){
                     mapStr = ssapi.printStr(arrI, nsLn);
                     while(mapStr.charAt(i) != mmPali.charAt(i)) {
-                        ip2 = rsapi.getP2(mapStr, pop2, j, i, dosJmx);
-
+                        ip2 = rsapi.getP2sj(mapStr, pop2, j, i, dosJmx);
                         ip1 = mmPali.indexOf(pop2);
                         if(Math.abs(ip2 - ip1) > dosJmx) {
                             ip1 = ip2 - dosJmx;
@@ -539,11 +554,10 @@ public class testSEARCH {
                             ip1 = i;
                         }
                         rsapi.exch(arrI, ip2, ip1);
-                        
                         swapsOutput[swapC] = "(" + ip1 + "," + ip2 + ")"; 
                         mapStr = ssapi.printStr(arrI, nsLn);
                         smapStr = ssapi.printStr(arrI, lne);
-                        
+                    
                         if(smapStr.equals(pali)) {
                             swapsOutput[swapsOutput.length - 1] = swapC + "";
                             return swapsOutput;
@@ -553,7 +567,6 @@ public class testSEARCH {
                             return null;
                         }
                     }
-        //if(mapStr.charAt(i) == mmPali.charAt(i)) will be true
                     for(int i3 = i; i3 < N; i3 ++) {
                         if(mapStr.charAt(i3) == mmPali.charAt(i3)) {
                             nsbLn.setCharAt(i3, '^');
@@ -569,7 +582,7 @@ public class testSEARCH {
     }
 
 
-        /**
+    /**
      * Better algorythm to make the map sequence 
      * SwapC is Swap count variable
      * nsLine for (not same line) is a String of the quazipalindrome 
@@ -598,30 +611,23 @@ public class testSEARCH {
         RRRArrayFunctions raf = new RRRArrayFunctions();
         RRRStringstuffAPI ssapi = new RRRStringstuffAPI();
         RRRSortingAPI rsapi = new RRRSortingAPI();
-        String nsLn = lne, mmPali = pali, mapStr, smapStr = "]]]]]]]]]";
+        String nsLn = lne, mmPali = pali, smapStr = "]]]]]]]]]";
         StringBuilder nsbLn, nsbPali;
         String[] swapsOutput = new String[lne.length()];
         Comparable[] arrI = new Comparable[sComAr.length];
         int ip2, ip1, swapC = 0, N = lne.length(), j;
-        char curChar;
-
+        char curChar, ch1, ch2;
         raf.CopyEmutCom(sComAr, arrI);
         nsLn = ssapi.SameSame(nsLn, mmPali);
         mmPali = ssapi.SameSameCap(mmPali, lne);
         nsbLn = new StringBuilder(nsLn);
         nsbPali = new StringBuilder(mmPali);
-
-        
         for (int i = 0; i < N; i++) {
             if(nsLn.charAt(i) != '-' ) {
-            mapStr = ssapi.printStr(arrI, nsLn);
-            smapStr = ssapi.printStr(arrI, lne);
-            curChar = smapStr.charAt(i);
-            if(curChar == 'C'){
-                System.out.println("Pause");
-            }
+                smapStr = ssapi.printStr(arrI, lne);
+                curChar = smapStr.charAt(i);
                 j = i + dosJmx;
-                ip2 = rsapi.getP2P58(mmPali, curChar, j, i, dosJmx);
+                ip2 = rsapi.getP2bj(mmPali, curChar, j, i, dosJmx);
                 ip1 = nsLn.indexOf(curChar);
                 if(Math.abs(ip2 - ip1) > dosJmx) {
                     ip1 = ip2 - dosJmx;
@@ -635,21 +641,17 @@ public class testSEARCH {
                     rsapi.exch(arrI, ip2, ip1);
                     swapsOutput[swapC] = "(" + ip1 + "," + ip2 + ")"; 
                     swapC++;
-                    System.out.println(ip1 + " " + ip2);
-                    mapStr = ssapi.printStr(arrI, nsLn);
-                    smapStr = ssapi.printStr(arrI, lne);
-                    
+                    smapStr = ssapi.printStr(arrI, lne);                    
                     if(smapStr.equals(pali)){
                         swapsOutput[swapsOutput.length - 1] = swapC + "";
                             return swapsOutput;
                     }
-                if(mmPali.charAt(mmPali.indexOf(curChar)) == smapStr.charAt(mmPali.indexOf(curChar))){
-                    break;
-                }
-                
-                    return cMakeMpP57(lne, pali, sComAr, dosJmx);
-                    //ip2 = rsapi.getP2(mmPali, curChar, j, i, dosJmx);
-                    //ip1 = mapStr.indexOf(curChar);
+                    ch1 = mmPali.charAt(mmPali.indexOf(curChar));
+                    ch2 = smapStr.charAt(mmPali.indexOf(curChar));
+                    if(ch1 == ch2){
+                        break;
+                    }                
+                    return smlJumpL(lne, pali, sComAr, dosJmx);
                 }
                     nsLn = smapStr;
                     nsbLn = new StringBuilder(nsLn);
@@ -661,7 +663,6 @@ public class testSEARCH {
                             mmPali = nsbPali + "";
                         }
                     }
-                    System.out.println("pause");
                 } else {
                     if(i > 0) {
                         if(nsLn.charAt(i-1) != '-'){
@@ -673,6 +674,45 @@ public class testSEARCH {
         return swapsOutput;
     }
 
+     /**
+     * Does the sorting of the string that was entered. It does not do sorting
+     * anymore it just groups all the pares together.
+     *
+     * @param suiQP QuaziPalindrome
+     */
+    public void groupPairs(String suiQP) {
+        String hold2 = "";
+        String tail = "";
+        String hold3 = suiQP;
+        char rep;
+        int sAmount;
+        int nN;
+        while ((hold2.length() + tail.length()) != suiQP.length()) {
+            rep = hold3.charAt(0);
+            hold3 = hold3.replace(rep + "", "");
+            sAmount = suiQP.length() - hold3.length() - hold2.length() - tail.length();
+            nN = (sAmount / 2) * 2;
+            for (int i = 0; i < (sAmount / 2) * 2; i++) {
+                hold2 = hold2 + rep;
+            }
+            if (sAmount != nN) {
+                tail = tail + rep;
+            }
+        }
+        sorted = "" + hold2 + tail;
+    }
 
+    enum HeadTail {
+        Head, Tail
+    }
+
+    /**
+     * Get the sorted string
+     *
+     * @return getSorted
+     */
+    public String getSorted() {
+        return sorted;
+    }
 
 }
