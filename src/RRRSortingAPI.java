@@ -173,16 +173,13 @@ public class RRRSortingAPI {
      * @param n length of array
      * @return The pointer to the character array
      */
-    public Comparable[] flCompa(Comparable[] a, int n) {
-        
+    public Comparable[] flCompa(Comparable[] a, int n) {        
         Comparable[] b = new Comparable[n];
-
         for (int i = 0; i < n; i++) {
             b[i] = i;
         }
         return b;
     }
-
 
     /**
      * Stops integer from itterating towards a negative number
@@ -195,7 +192,6 @@ public class RRRSortingAPI {
         }
         return j;
     }
-
 
     /**
      * This method is used to see if the method makeSecondhalf

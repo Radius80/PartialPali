@@ -26,43 +26,37 @@ public class PPTESTMethods {
         testSEARCH tss = new testSEARCH();
         Comparable[] arrIdx;
         String rightOutput = "";        
-        //MakeMap
-        //String line = "AATTCC"; rightOutput = "(0,4) 1 "; String pali = "CATTAC"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
-        //String line = "GCGACA"; rightOutput = "(0,3) 1 "; String pali = "ACGGCA"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testGCGACA();
-        //String line = "TTAGAAA"; rightOutput = "(0,5) 1 "; String pali = "ATAGATA"; int dosJmx = 6; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testTTAGAAA();
 
-        //String line = "TACGACGTGCAGCA"; rightOutput = "(0,1) (1,2) (2,3) (3,4) (4,5) (5,6) 5 "; String pali = "ACGACGTTGCAGCA"; int dosJmx = 1; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH4();
-        //String line = "ACGACGTGCAGCAT"; rightOutput = "(5,6) (4,5) (3,4) (2,3) (1,2) (0,1) 5 "; String pali = "TACGACGGCAGCAT"; int dosJmx = 1; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH4();
-        //String line = "TACGTACGGCAGCA"; rightOutput = "(0,1) (1,2) (2,3) (4,5) (3,4) (5,6) (4,5) (6,7) (5,6) 8 "; String pali = "ACGACGTTGCAGCA"; int dosJmx = 1; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH4();
+        //MakePali
+        //String line = "AATTCC"; String swpline = "{AATTCC=[(0,4)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testAATTCC();
+        //String line = "GCGACA"; String swpline = "{GCGACA=[(0,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testGCGACA();
+        //String line = "TTAGAAA"; String swpline = "{TTAGAAA=[(0,5)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testTTAGAAA();
+        //String line = "TACGACGTGCAGCA"; String swpline = "{TACGACGTGCAGCA=[(0,1), (1,2), (2,3), (3,4), (4,5), (5,6)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH4();
+        //String line = "ACGACGTGCAGCAT"; String swpline = "{ACGACGTGCAGCAT=[(5,6), (4,5), (3,4), (2,3), (1,2), (0,1)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH4();
+        //String line = "TACGTACGGCAGCA"; String swpline = "{TACGTACGGCAGCA=[(0,1), (1,2), (2,3), (4,5), (3,4), (5,6), (4,5), (6,7), (5,6)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH4();
 
-        //String line = "TCAAGCCTGCATGGA"; rightOutput = "(0,3) (2,4) (6,13) 3 "; String pali = "ACGTACGTGCATGCA"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); qptm.testcase();
+        //String line = "GTTCGC"; String swpline = "{GTTCGC=[(0,1), (0,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
+        //String line = "CATATGC"; String swpline = "{CATATGC=[(3,5)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
+        //String line = "CCCGTTC"; String swpline = "{CCCGTTC=[(1,4)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
+        //String line = "CGCATAT"; String swpline = "{CGCATAT=[(0,4), (1,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
+        //String line = "CGTTCGC"; String swpline = "{CGTTCGC=[(3,4)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
+        //String line = "GCATATG"; String swpline = "{GCATATG=[(1,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
+        //String line = "GTTCGCA"; String swpline = "{GTTCGCA=[(0,2), (0,5), (3,6)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
+        //String line = "TCGCATA"; String swpline = "{TCGCATA=[(0,1), (0,4), (2,3)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
+        //String line = "AAGCC"; String swpline = "{AAGCC=[(1,2), (2,3), (1,2), (0,1)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.tsP105cash();
+        String line = "AGTGT"; String swpline = "{AGTGT=[(0,1), (1,2), (0,1)]}"; int dosJmx = line.length(); arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.tsP105cash();
+      
+        Comparable [] arrIdx2 = new Comparable[line.length()];
+        arrIdx2 = rsapi.flCompa(arrIdx, line.length());
+        rsapi.doSwaps(swpline, arrIdx2);
+        System.out.println(ssapi.printStr(arrIdx2, line));
+        String sPaLi = tss.mkPali(line, dosJmx);
+        System.out.println(sPaLi + " " + sPaLi.equals(ssapi.printStr(arrIdx2, line)));
+        if( sPaLi.equals(ssapi.printStr(arrIdx2, line) ) ) {
+         System.out.println("YAAAAAAATAAAAAAAA");
+        }        
 
-        //String line = "GTTCGC"; rightOutput = "(0,1) (0,3) 2 "; String pali = "CGTTGC"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-        //String line = "CATATGC"; rightOutput = "(3,5) 1 "; String pali = "CATGTAC"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-        //String line = "CCCGTTC"; rightOutput = "(1,4) 1 "; String pali = "CTCGCTC"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-        //String line = "CGCATAT"; rightOutput = "(0,4) (1,3) 2 "; String pali = "TACGCAT"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-        //String line = "CGTTCGC"; rightOutput = "(3,4) 1 "; String pali = "CGTCTGC"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-        //String line = "GCATATG"; rightOutput = "(1,3) 1 "; String pali = "GTACATG"; int dosJmx = 7; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-        //String line = "GTTCGCA"; rightOutput = "(0,2) (0,5) (3,6) 3 "; String pali = "CTGAGTC"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-        String line = "TCGCATA"; rightOutput = "(0,1) (0,4) (2,3) 3 "; String pali = "ATCGCTA"; int dosJmx = 5; arrIdx = new Comparable[line.length()]; arrIdx = rsapi.flCompa(arrIdx, line.length()); tss.testSH5();
-
-        //Comparable [] arrIdx2 = new Comparable[line.length()]; 
-        //arrIdx2 = rsapi.flCompa(arrIdx, line.length()); 
-        //rsapi.doSwaps(swpline, arrIdx2);
-        //System.out.println(ssapi.printStr(arrIdx2, line));
-        //String sPaLi = tss.mkPali(line, dosJmx);
-        //System.out.println(sPaLi + " " + sPaLi.equals(ssapi.printStr(arrIdx2, line)));
-        //if( sPaLi.equals(ssapi.printStr(arrIdx2, line) ) ) {
-        //    System.out.println("YAAAAAAATAAAAAAAA");
-        //}
-        
-        String[] swaps = new String[line.length()]; 
-        swaps = tss.cMakeMpP59(line, pali, arrIdx, dosJmx);
-
-        System.out.println(ssapi.lstTARRAYString(swaps) + "|" + rightOutput );
-        System.out.println(ssapi.lstTARRAYString(swaps).equals(rightOutput) );
-
-    }//end main
+}//end main
 
 //11111111//11111111//11111111//11111111//11111111//11111111//11111111//11111111//11111111//11111111
 
